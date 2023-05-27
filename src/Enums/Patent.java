@@ -9,10 +9,12 @@
  */
 package Enums;
 
+import java.io.Serializable;
+
 /**
  * Enumerator of the {@link Models.CrewMember CrewMembers}' Patent
  */
-public enum Patent {
+public enum Patent implements Serializable {
     PRACA,
     SARGENTO,
     SUBALTERNO,

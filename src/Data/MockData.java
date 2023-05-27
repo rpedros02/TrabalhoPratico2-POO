@@ -28,7 +28,7 @@ public class MockData {
     private static final String[] MEDALS = {"Medalha de Valor", "Medalha de Salvamento Ultramar", "Medalha de Extremo Valor", "Medalha de Bons Serviços", "Medalha Militar da Cruz da Guerra"};
 
     private static String genShipName() {
-        return SHIPS1STNAMES[genRandomInt(0, SHIPS1STNAMES.length)] + " " + SHIPS2NDNAMES[genRandomInt(0, SHIPS2NDNAMES.length)];
+        return SHIPS1STNAMES[genRandomInt(0, SHIPS1STNAMES.length - 1)] + " " + SHIPS2NDNAMES[genRandomInt(0, SHIPS2NDNAMES.length - 1)];
     }
 
     private static int genRandomInt(int origin, int bound) {
@@ -110,19 +110,19 @@ public class MockData {
     }
 
     private static CrewMember genCrewMember() {
-        return new CrewMember(NAMES[genRandomInt(0, NAMES.length)], genPatent(), genDate());
+        return new CrewMember(NAMES[genRandomInt(0, NAMES.length - 1)] + " " + SURNAMES[genRandomInt(0, SURNAMES.length - 1)], genPatent(), genDate());
     }
 
     private static String[] genMedals() {
         String[] medals = new String[genRandomInt(0, 5)];
         for (int i = 0; i < medals.length; i++) {
-            medals[i] = MEDALS[genRandomInt(0, MEDALS.length)];
+            medals[i] = MEDALS[genRandomInt(0, MEDALS.length - 1)];
         }
         return medals;
     }
 
     private static Captain genCaptain() {
-        return new Captain(NAMES[genRandomInt(0, NAMES.length)], genPatent(), genDate(), genMedals());
+        return new Captain(NAMES[genRandomInt(0, NAMES.length - 1)] + " " + SURNAMES[genRandomInt(0, SURNAMES.length - 1)], genPatent(), genDate(), genMedals());
     }
 
     private static CorvetteType genCorvetteType() {
@@ -175,20 +175,20 @@ public class MockData {
     }
 
     private static void insertFrigates(Frigate[] container, Operation[] operationsContainer) {
-        for (int i = 0; i < FRIGATE_INITIAL_NUMBER; i++) {
-            container[i] = new Frigate(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length)], genDate(), genDate(), genDate(), genDate(), genDate(), (double) genRandomInt(75, 150), (double) genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genFrigateType(), genEquipmentList());
+        for (int i = 0; i < container.length; i++) {
+            container[i] = new Frigate(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), (double) genRandomInt(75, 150), (double) genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genFrigateType(), genEquipmentList());
         }
     }
 
     private static void insertCorvettes(Corvette[] container, Operation[] operationsContainer) {
-        for (int i = 0; i < CORVETTE_INITIAL_NUMBER; i++) {
-            container[i] = new Corvette(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length)], genDate(), genDate(), genDate(), genDate(), genDate(), (double) genRandomInt(75, 150), (double) genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genCorvetteType(), genRandomInt(1, 20));
+        for (int i = 0; i < container.length; i++) {
+            container[i] = new Corvette(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), (double) genRandomInt(75, 150), (double) genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genCorvetteType(), genRandomInt(1, 20));
         }
     }
 
     private static void insertSpeedBoats(SpeedBoat[] container, Operation[] operationsContainer) {
-        for (int i = 0; i < SPEEDBOAT_INITIAL_NUMBER; i++) {
-            container[i] = new SpeedBoat(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length)], genDate(), genDate(), genDate(), genDate(), genDate(), (double) genRandomInt(75, 150), (double) genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genRandomInt(1, 20));
+        for (int i = 0; i < container.length; i++) {
+            container[i] = new SpeedBoat(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), (double) genRandomInt(75, 150), (double) genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genRandomInt(1, 20));
         }
     }
 
@@ -197,21 +197,27 @@ public class MockData {
     }
 
     public static void generateData(NavalCommand navalCommand) {
+        navalCommand.setCaptains(new Captain[CAPTAIN_INITIAL_NUMBER]);
+        navalCommand.setCorvettes(new Corvette[CORVETTE_INITIAL_NUMBER]);
+        navalCommand.setCrewMembers(new CrewMember[CREWMEMBER_INITIAL_NUMBER]);
+        navalCommand.setFrigatesContainer(new Frigate[FRIGATE_INITIAL_NUMBER]);
+        navalCommand.setSpeedBoats(new SpeedBoat[SPEEDBOAT_INITIAL_NUMBER]);
+        navalCommand.setOperationsContainer(new Operation[OPERATION_INITIAL_NUMBER]);
         navalCommand.setName("Comando Naval - MOCK");
         insertFrigates(navalCommand.getFrigatesContainer(), navalCommand.getOperationsContainer());
         insertCorvettes(navalCommand.getCorvettes(), navalCommand.getOperationsContainer());
         insertSpeedBoats(navalCommand.getSpeedBoats(), navalCommand.getOperationsContainer());
         insertCaptains(navalCommand.getCaptains());
         insertCrewMember(navalCommand.getCrewMembers());
-        for (int k = 0; k < OPERATION_INITIAL_NUMBER; k++) {
+        for (int k = 0; k < navalCommand.getOperationsContainer().length - 1; k++) {
             int crewSize = genRandomInt(4, 9);
             CrewMember[] crew = new CrewMember[crewSize];
             for (int i = 0; i < crewSize; i++) {
-                crew[i] = navalCommand.getCrewMembers()[genRandomInt(0, navalCommand.getCrewMembers().length)];
+                crew[i] = navalCommand.getCrewMembers()[genRandomInt(0, navalCommand.getCrewMembers().length - 1)];
             }
-            CrewMember approving = navalCommand.getCrewMembers()[genRandomInt(0,navalCommand.getCrewMembers().length)];
-            Captain captain = navalCommand.getCaptains()[genRandomInt(0, navalCommand.getCaptains().length)];
-            insertOperation(k, navalCommand.getOperationsContainer(), captain,approving,crew);
+            CrewMember approving = navalCommand.getCrewMembers()[genRandomInt(0, navalCommand.getCrewMembers().length - 1)];
+            Captain captain = navalCommand.getCaptains()[genRandomInt(0, navalCommand.getCaptains().length - 1)];
+            insertOperation(k, navalCommand.getOperationsContainer(), captain, approving, crew);
         }
     }
 }

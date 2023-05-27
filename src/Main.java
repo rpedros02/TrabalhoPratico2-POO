@@ -7,13 +7,14 @@
  * Número: 8221002
  * Turma: LSIG
  */
-package Models;
 
 import Data.DataOperations;
 import Data.MockData;
 import Exceptions.InvalidNumberException;
+import Models.Frigate;
+import Models.NavalCommand;
+import Models.Ship;
 
-import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -21,8 +22,17 @@ public class Main {
         int option = mainMenu();
         switch (option) {
             case 1 -> {
-                NavalCommand navalCommand = DataOperations.load();
-                MockData.generateData(navalCommand);
+                if (DataOperations.load() == null) {
+                    NavalCommand navalCommand = new NavalCommand();
+                    MockData.generateData(navalCommand);
+                    DataOperations.save(navalCommand);
+                    System.out.println(navalCommand.getName());
+                } else {
+                    NavalCommand navalCommand = DataOperations.load();
+                    for(Frigate ship : navalCommand.getFrigatesContainer()){
+                        System.out.println(ship.getName());
+                    }
+                }
             }
             case 2 -> {
 

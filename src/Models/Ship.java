@@ -45,4 +45,8 @@ public abstract class Ship implements Serializable {
         this.history = history;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
 }

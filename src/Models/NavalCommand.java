@@ -26,16 +26,19 @@ public class NavalCommand implements Serializable {
     public NavalCommand() {
     }
 
-    public NavalCommand(String name, CrewMember[] crewMembers, Captain[] captains, Frigate[] frigates, Corvette[] corvettes, SpeedBoat[] speedBoats, Operation[] operationsContainer) {
-        this.name = name;
-        this.crewMembers = crewMembers;
-        this.captains = captains;
-        this.frigatesContainer = frigates;
-        this.corvettes = corvettes;
-        this.speedBoats = speedBoats;
-        this.operationsContainer = operationsContainer;
+    public NavalCommand(String name) {
+        setName(name);
     }
 
+    public NavalCommand(String name, CrewMember[] crewMembers, Captain[] captains, Frigate[] frigates, Corvette[] corvettes, SpeedBoat[] speedBoats, Operation[] operationsContainer) {
+        setName(name);
+        setCrewMembers(crewMembers);
+        setCaptains(captains);
+        setFrigatesContainer(frigates);
+        setCorvettes(corvettes);
+        setSpeedBoats(speedBoats);
+        setOperationsContainer(operationsContainer);
+    }
 
     public String getName() {
         return name;

@@ -17,51 +17,99 @@ import Models.NavalCommand;
 import java.util.Scanner;
 
 public class Main {
+    /**
+     * Main Funcion
+     */
+    public static void main(String[] args) {
+        NavalCommand navalCommand = new NavalCommand();
+        if (DataOperations.load() == null) {
+            switch (initialMenu()) {
+                case 1 -> {
+                    navalCommand = new NavalCommand();
+                    MockData.generateData(navalCommand);
+                    DataOperations.save(navalCommand);
+                    System.out.println(navalCommand.getName() + " loaded.\b");
+                    navalCommand = DataOperations.load();
+                    System.out.println(navalCommand.getName() + " loaded.\b");
+                }
+                case 2 -> {
+                    navalCommand = createNavalCommand();
+                    System.out.println(navalCommand.getName() + " created.\b");
+                }
+                default -> System.out.println("\b--Goodbye!--");
+            }
+        }
+        navalCommand = DataOperations.load();
+        System.out.println(navalCommand.getName() + " loaded.\b");
+        int option = -1;
+        do {
+            option = mainMenu();
+            switch (option) {
+                case 1 -> {
+                    navalMenu(navalCommand);
+                }
+                case 2 -> {
+                    ShipController.shipMenu();
+                }
+            }
+        } while (option != 0);
+        System.out.println("\b--Goodbye!--");
+    }
+
+    /**
+     * Method to retrieve users input.
+     *
+     * @param sc → Scanner
+     * @return int value of user input
+     */
+    public static int getOption(Scanner sc) {
+        int option = -1;
+        System.out.print("--> ");
+        try {
+            option = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: " + e);
+        }
+        if (option < 0 || option > 2) {
+            System.out.println("Invalid Option!\b");
+        }
+        return option;
+    }
+    /**
+     * Initial menu deployed when there is no data about a Naval Command, it allows the user to choose either to generate a new MOCK using {@link MockData}, or creating an empty one.
+     *
+     * @return a fresh new Naval Command object, either with data, or not.
+     * @throws InvalidNumberException when an error occurs while parsing the user input.
+     */
     private static int initialMenu() throws InvalidNumberException {
         Scanner sc = new Scanner(System.in);
         int option = -1;
         do {
-            System.out.println("Main Menu");
-            System.out.println("1. Load Naval Command;");
+            System.out.println("\nData Menu");
+            System.out.println("1. Generate MOCK Naval Command;");
             System.out.println("2. Create New Naval Command;");
             System.out.println("0. Quit");
-            System.out.print("--> ");
-            try {
-                option = Integer.parseInt(sc.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Error: " + e);
-            }
-            if (option < 0 || option > 2) {
-                System.out.println("Invalid Option!\n");
-            }
+            option = getOption(sc);
         } while (option < 0 || option > 2);
         return option;
     }
 
-    private static NavalCommand createNavalCommand() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("\nNaval Command Name: ");
-        return new NavalCommand(sc.nextLine());
-    }
-
-    private static int mainMenu() {
+    /**
+     * Function that prints the main menu of the app and retrieves the users input option.
+     *
+     * @return users option
+     */
+    private static int mainMenu() throws InvalidNumberException {
         Scanner sc = new Scanner(System.in);
         int option = -1;
         do {
-            System.out.println("Main Menu");
+            System.out.println("\nMain Menu");
             System.out.println("1. Naval Command Menu;");
             System.out.println("2. Ship Menu;");
             System.out.println("3. Crew Menu;");
             System.out.println("0. Quit");
-            System.out.println("--> ");
-            try {
-                option = Integer.parseInt(sc.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Error: " + e);
-            }
-            if (option < 0 || option > 3) {
-                System.out.println("Invalid Option!\n");
-            }
+            System.out.print("--> ");
+            option = getOption(sc);
         } while (option < 0 || option > 3);
         return option;
     }
@@ -74,46 +122,33 @@ public class Main {
      */
     private static void navalMenu(NavalCommand navalCommand) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Editing - " + navalCommand.getName());
+        System.out.println("\bEditing - " + navalCommand.getName());
         System.out.println("Are you sure you want to change the name? (y - yes | n- no)");
         System.out.print("--> ");
         switch (sc.nextLine().toLowerCase()) {
             case "y" -> {
                 System.out.println("Enter the new Naval Command's name: ");
                 System.out.print("--> ");
-                navalCommand.setName(sc.nextLine());
+                String newName = sc.nextLine();
+                navalCommand.setName(newName);
+                DataOperations.save(navalCommand);
             }
-            case "n" -> System.out.println("Answer not registered.\n");
+            case "n" -> System.out.println("Answer not registered.\b");
             default -> throw new InvalidInputException("Error: the given input doesnt satisfy the requirements!\n");
         }
     }
 
-    public static void main(String[] args) {
-        NavalCommand navalCommand = new NavalCommand();
-        int option;
-        switch (option = initialMenu()) {
-            case 1 -> {
-                if (DataOperations.load() == null) {
-                    navalCommand = new NavalCommand();
-                    MockData.generateData(navalCommand);
-                    DataOperations.save(navalCommand);
-                    System.out.println(navalCommand.getName() + " loaded.\n");
-                } else {
-                    navalCommand = DataOperations.load();
-                    System.out.println(navalCommand.getName() + " loaded.\n");
-                }
-            }
-            case 2 -> {
-                navalCommand = createNavalCommand();
-                System.out.println(navalCommand.getName() + " created.\n");
-            }
-            default -> System.out.println("Goodbye!");
-        }
-        if (option != 0) {
-            if (mainMenu() == 1) {
-                navalMenu(navalCommand);
-            }
-        }
+    /**
+     * Funcion that creates a new standard Naval Command
+     *
+     * @return the new Naval Command
+     * @throws InvalidNumberException when an error occurs while parsing the user input.
+     */
+    private static NavalCommand createNavalCommand() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\bNaval Command Name: ");
+        return new NavalCommand(sc.nextLine());
     }
+
 }
 

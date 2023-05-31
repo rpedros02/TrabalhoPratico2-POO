@@ -28,7 +28,6 @@ public class Main {
                     navalCommand = new NavalCommand();
                     MockData.generateData(navalCommand);
                     DataOperations.save(navalCommand);
-                    System.out.println(navalCommand.getName() + " loaded.\b");
                     navalCommand = DataOperations.load();
                     System.out.println(navalCommand.getName() + " loaded.\b");
                 }
@@ -40,7 +39,6 @@ public class Main {
             }
         }
         navalCommand = DataOperations.load();
-        System.out.println(navalCommand.getName() + " loaded.\b");
         int option = -1;
         do {
             option = mainMenu();
@@ -49,7 +47,7 @@ public class Main {
                     navalMenu(navalCommand);
                 }
                 case 2 -> {
-                    ShipController.shipMenu();
+                    ShipController.run(navalCommand);
                 }
             }
         } while (option != 0);
@@ -101,14 +99,15 @@ public class Main {
      */
     private static int mainMenu() throws InvalidNumberException {
         Scanner sc = new Scanner(System.in);
+        NavalCommand navalCommand = DataOperations.load();
         int option = -1;
         do {
             System.out.println("\nMain Menu");
+            System.out.println("Naval Command: " + navalCommand.getName());
             System.out.println("1. Naval Command Menu;");
             System.out.println("2. Ship Menu;");
             System.out.println("3. Crew Menu;");
             System.out.println("0. Quit");
-            System.out.print("--> ");
             option = getOption(sc);
         } while (option < 0 || option > 3);
         return option;

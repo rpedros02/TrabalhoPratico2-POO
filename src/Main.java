@@ -8,6 +8,7 @@
  * Turma: LSIG
  */
 
+import Controllers.ShipController;
 import Data.DataOperations;
 import Data.MockData;
 import Exceptions.InvalidInputException;
@@ -54,25 +55,7 @@ public class Main {
         System.out.println("\b--Goodbye!--");
     }
 
-    /**
-     * Method to retrieve users input.
-     *
-     * @param sc → Scanner
-     * @return int value of user input
-     */
-    public static int getOption(Scanner sc) {
-        int option = -1;
-        System.out.print("--> ");
-        try {
-            option = Integer.parseInt(sc.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Error: " + e);
-        }
-        if (option < 0 || option > 2) {
-            System.out.println("Invalid Option!\b");
-        }
-        return option;
-    }
+
     /**
      * Initial menu deployed when there is no data about a Naval Command, it allows the user to choose either to generate a new MOCK using {@link MockData}, or creating an empty one.
      *
@@ -87,7 +70,7 @@ public class Main {
             System.out.println("1. Generate MOCK Naval Command;");
             System.out.println("2. Create New Naval Command;");
             System.out.println("0. Quit");
-            option = getOption(sc);
+            option = (int) ShipController.getOption(sc);
         } while (option < 0 || option > 2);
         return option;
     }
@@ -107,9 +90,10 @@ public class Main {
             System.out.println("1. Naval Command Menu;");
             System.out.println("2. Ship Menu;");
             System.out.println("3. Crew Menu;");
+            System.out.println("4. Operation Menu;");
             System.out.println("0. Quit");
-            option = getOption(sc);
-        } while (option < 0 || option > 3);
+            option = (int) ShipController.getOption(sc);
+        } while (option < 0 || option > 4);
         return option;
     }
 

@@ -12,6 +12,9 @@ package Models;
 
 import java.io.Serializable;
 import java.time.Year;
+import java.util.Scanner;
+
+import Controllers.ShipController;
 import Exceptions.InvalidDateException;
 
 public class Date implements Serializable {
@@ -142,6 +145,17 @@ public class Date implements Serializable {
      */
     private boolean isLeap(int year) {
         return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+    }
+
+    public static Date newDate(String label){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Day of " + label);
+        int day = (int) ShipController.getOption(sc);
+        System.out.print("Month of " + label);
+        int month = (int) ShipController.getOption(sc);
+        System.out.print("Year of " + label);
+        int year = (int) ShipController.getOption(sc);
+        return new Date(day,month,year);
     }
 
     /**

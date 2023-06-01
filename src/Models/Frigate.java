@@ -15,12 +15,19 @@ import Enums.FrigateType;
 import java.io.Serializable;
 
 public class Frigate extends Ship implements Serializable {
+    public int id; // Identifier of the Ship
+    private static int lastId = 0; // Last Ship's ID
     private FrigateType frigateType; // Frigate Type
     private Equipment[] equipment; // Frigate equipment
 
-    public Frigate(String name,String manufacturer,Date baptismDate,Date lastInspection, Date nextInspection, Date lastMaintenance,Date nextMaintenance,double lengthInMeters, double weightInTons,int maxSpeedKnots, Operation[] history,FrigateType frigateType, Equipment[] equipment) {
+    public Frigate(String name, String manufacturer, Date baptismDate, Date lastInspection, Date nextInspection, Date lastMaintenance, Date nextMaintenance, double lengthInMeters, double weightInTons, int maxSpeedKnots, Operation[] history, FrigateType frigateType, Equipment[] equipment) {
         super(name, manufacturer, baptismDate, lastInspection, nextInspection, lastMaintenance, nextMaintenance, lengthInMeters, weightInTons, maxSpeedKnots, history);
+        this.id = lastId++;
         this.frigateType = frigateType;
         this.equipment = equipment;
+    }
+
+    public Frigate() {
+        super();
     }
 }

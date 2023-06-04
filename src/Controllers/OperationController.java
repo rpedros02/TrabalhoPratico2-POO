@@ -9,5 +9,12 @@
  */
 package Controllers;
 
+import Models.NavalCommand;
+
 public class OperationController {
+
+    public void run(NavalCommand navalCommand){
+
+    }
+
 }

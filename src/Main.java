@@ -22,7 +22,7 @@ public class Main {
      * Main Funcion
      */
     public static void main(String[] args) {
-        NavalCommand navalCommand = new NavalCommand();
+        NavalCommand navalCommand;
         if (DataOperations.load() == null) {
             switch (initialMenu()) {
                 case 1 -> {
@@ -87,7 +87,7 @@ public class Main {
         do {
             System.out.println("\nMain Menu");
             System.out.println("Naval Command: " + navalCommand.getName());
-            System.out.println("1. Naval Command Menu;");
+            System.out.println("1. Edit Naval Command;");
             System.out.println("2. Ship Menu;");
             System.out.println("3. Crew Menu;");
             System.out.println("4. Operation Menu;");
@@ -102,22 +102,27 @@ public class Main {
      * The only editable attribute is its name, so the only option given to the user is if they want to edit the name or not.
      *
      * @param navalCommand → The Naval Command to edit.
+     * @throws InvalidInputException when the input doesnt satisfy the required.
      */
     private static void navalMenu(NavalCommand navalCommand) {
         Scanner sc = new Scanner(System.in);
         System.out.println("\bEditing - " + navalCommand.getName());
         System.out.println("Are you sure you want to change the name? (y - yes | n- no)");
         System.out.print("--> ");
-        switch (sc.nextLine().toLowerCase()) {
-            case "y" -> {
-                System.out.println("Enter the new Naval Command's name: ");
-                System.out.print("--> ");
-                String newName = sc.nextLine();
-                navalCommand.setName(newName);
-                DataOperations.save(navalCommand);
+        try {
+            switch (sc.nextLine().toLowerCase()) {
+                case "y" -> {
+                    System.out.println("Enter the new Naval Command's name: ");
+                    System.out.print("--> ");
+                    String newName = sc.nextLine();
+                    navalCommand.setName(newName);
+                    DataOperations.save(navalCommand);
+                }
+                case "n" -> System.out.println("Answer not registered.\b");
+                default -> throw new InvalidInputException("Error: the given input is not recognized!\n");
             }
-            case "n" -> System.out.println("Answer not registered.\b");
-            default -> throw new InvalidInputException("Error: the given input doesnt satisfy the requirements!\n");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 

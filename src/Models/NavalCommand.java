@@ -18,7 +18,7 @@ public class NavalCommand implements Serializable {
     private String name; // Naval Command's name
     private CrewMember[] crewMembers; // List of Crew Members
     private Captain[] captains; // List of Captains
-    private Frigate[] frigatesContainer; // List of Frigates
+    private FrigateList frigatesContainer; // List of Frigates
     private Corvette[] corvettes; // List of Corvettes
     private SpeedBoat[] speedBoats; // List of Speed Boats
     private Operation[] operationsContainer; // List of Operations
@@ -30,7 +30,7 @@ public class NavalCommand implements Serializable {
         setName(name);
     }
 
-    public NavalCommand(String name, CrewMember[] crewMembers, Captain[] captains, Frigate[] frigates, Corvette[] corvettes, SpeedBoat[] speedBoats, Operation[] operationsContainer) {
+    public NavalCommand(String name, CrewMember[] crewMembers, Captain[] captains, FrigateList frigates, Corvette[] corvettes, SpeedBoat[] speedBoats, Operation[] operationsContainer) {
         setName(name);
         setCrewMembers(crewMembers);
         setCaptains(captains);
@@ -64,11 +64,8 @@ public class NavalCommand implements Serializable {
         this.captains = captains;
     }
 
-    public Frigate[] getFrigatesContainer() {
-        return frigatesContainer;
-    }
 
-    public void setFrigatesContainer(Frigate[] frigatesContainer) {
+    public void setFrigatesContainer(FrigateList frigatesContainer) {
         this.frigatesContainer = frigatesContainer;
     }
 
@@ -94,5 +91,9 @@ public class NavalCommand implements Serializable {
 
     public void setOperationsContainer(Operation[] operationsContainer) {
         this.operationsContainer = operationsContainer;
+    }
+
+    public FrigateList getFrigatesContainer() {
+        return frigatesContainer;
     }
 }

@@ -19,7 +19,7 @@ public class NavalCommand implements Serializable {
     private CrewMember[] crewMembers; // List of Crew Members
     private Captain[] captains; // List of Captains
     private FrigateList frigatesContainer; // List of Frigates
-    private Corvette[] corvettes; // List of Corvettes
+    private CorvetteList corvettes; // List of Corvettes
     private SpeedBoat[] speedBoats; // List of Speed Boats
     private Operation[] operationsContainer; // List of Operations
 
@@ -30,7 +30,7 @@ public class NavalCommand implements Serializable {
         setName(name);
     }
 
-    public NavalCommand(String name, CrewMember[] crewMembers, Captain[] captains, FrigateList frigates, Corvette[] corvettes, SpeedBoat[] speedBoats, Operation[] operationsContainer) {
+    public NavalCommand(String name, CrewMember[] crewMembers, Captain[] captains, FrigateList frigates, CorvetteList corvettes, SpeedBoat[] speedBoats, Operation[] operationsContainer) {
         setName(name);
         setCrewMembers(crewMembers);
         setCaptains(captains);
@@ -52,8 +52,8 @@ public class NavalCommand implements Serializable {
         return crewMembers;
     }
 
-    public void setCrewMembers(CrewMember[] crewMemxbers) {
-        this.crewMembers = crewMemxbers;
+    public void setCrewMembers(CrewMember[] crewMembers) {
+        this.crewMembers = crewMembers;
     }
 
     public Captain[] getCaptains() {
@@ -69,11 +69,11 @@ public class NavalCommand implements Serializable {
         this.frigatesContainer = frigatesContainer;
     }
 
-    public Corvette[] getCorvettes() {
+    public CorvetteList getCorvettes() {
         return corvettes;
     }
 
-    public void setCorvettes(Corvette[] corvettes) {
+    public void setCorvettes(CorvetteList corvettes) {
         this.corvettes = corvettes;
     }
 

@@ -198,14 +198,14 @@ public class MockData {
 
     public static void generateData(NavalCommand navalCommand) {
         navalCommand.setCaptains(new Captain[CAPTAIN_INITIAL_NUMBER]);
-        navalCommand.setCorvettes(new Corvette[CORVETTE_INITIAL_NUMBER]);
+        navalCommand.setCorvettes(new CorvetteList());
         navalCommand.setCrewMembers(new CrewMember[CREWMEMBER_INITIAL_NUMBER]);
         navalCommand.setFrigatesContainer(new FrigateList());
         navalCommand.setSpeedBoats(new SpeedBoat[SPEEDBOAT_INITIAL_NUMBER]);
         navalCommand.setOperationsContainer(new Operation[OPERATION_INITIAL_NUMBER]);
         navalCommand.setName("Naval Command - MOCK");
         insertFrigates(navalCommand.getFrigatesContainer().getContainer(), navalCommand.getOperationsContainer());
-        insertCorvettes(navalCommand.getCorvettes(), navalCommand.getOperationsContainer());
+        insertCorvettes(navalCommand.getCorvettes().getContainer(), navalCommand.getOperationsContainer());
         insertSpeedBoats(navalCommand.getSpeedBoats(), navalCommand.getOperationsContainer());
         insertCaptains(navalCommand.getCaptains());
         insertCrewMember(navalCommand.getCrewMembers());

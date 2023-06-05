@@ -67,6 +67,11 @@ public class FrigateController {
     }
 
 
+    /**
+     * Method to request the user for the frigate type.
+     * @param sc Scanner to read input.
+     * @return the {@link FrigateType}.
+     */
     public static FrigateType getFrigateType(Scanner sc) {
         int op = -1;
         do {
@@ -92,6 +97,11 @@ public class FrigateController {
         }
     }
 
+    /**
+     * Method to request the data and create a new Frigate. See {@link Models.FrigateList#add(Frigate)} for the method that adds to the Frigate List.
+     * @param sc Scanner to read input.
+     * @param navalCommand The naval command to add the Frigate.
+     */
     public static void addFrigate(Scanner sc, NavalCommand navalCommand) {
         Frigate newFrigate = new Frigate();
         System.out.println("\n-Creating Frigate-");
@@ -127,6 +137,10 @@ public class FrigateController {
         navalCommand.getFrigatesContainer().add(newFrigate);
     }
 
+    /**
+     * Method that iterates the {@link Models.FrigateList} and outputs all the instances.
+     * @param navalCommand The naval command to iterate.
+     */
     private static void listFrigates(NavalCommand navalCommand) {
         for (Frigate f : navalCommand.getFrigatesContainer().getContainer()) {
             if (f != null) {

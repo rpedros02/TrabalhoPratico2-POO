@@ -10,7 +10,6 @@
 package Models;
 
 import Data.DataOperations;
-import Enums.Equipment;
 import Enums.FrigateType;
 
 import java.io.File;
@@ -21,9 +20,9 @@ public class Frigate extends Ship implements Serializable {
     public int id; // Identifier of the Ship
     public static int lastID = 0;
     private FrigateType frigateType; // Frigate Type
-    private Equipment[] equipment; // Frigate equipment
+    private EquipmentList equipment; // Frigate equipment
 
-    public Frigate(String name, String manufacturer, Date baptismDate, Date lastInspection, Date nextInspection, Date lastMaintenance, Date nextMaintenance, double lengthInMeters, double weightInTons, int maxSpeedKnots, Operation[] history, FrigateType frigateType, Equipment[] equipment) {
+    public Frigate(String name, String manufacturer, Date baptismDate, Date lastInspection, Date nextInspection, Date lastMaintenance, Date nextMaintenance, double lengthInMeters, double weightInTons, int maxSpeedKnots, OperationList history, FrigateType frigateType, EquipmentList equipment) {
         super(name, manufacturer, baptismDate, lastInspection, nextInspection, lastMaintenance, nextMaintenance, lengthInMeters, weightInTons, maxSpeedKnots, history);
         this.id = getNextId();
         this.frigateType = frigateType;

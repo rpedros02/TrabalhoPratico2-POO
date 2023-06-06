@@ -25,10 +25,10 @@ public abstract class Ship implements Serializable {
     protected double lengthInMeters; // Ship Length in Meters
     protected double weightInTons; // Ship weight in Tons
     protected int maxSpeedKnots; // Ship Max Speed in Knots
-    protected Operation[] history; // Ship Operation History - Array of Missions
+    protected OperationList history; // Ship Operation History - Array of Missions
 
 
-    protected Ship(String name, String manufacturer, Date baptismDate, Date lastInspection, Date nextInspection, Date lastMaintenance, Date nextMaintenance, double lengthInMeters, double weightInTons, int maxSpeedKnots, Operation[] history) {
+    protected Ship(String name, String manufacturer, Date baptismDate, Date lastInspection, Date nextInspection, Date lastMaintenance, Date nextMaintenance, double lengthInMeters, double weightInTons, int maxSpeedKnots, OperationList history) {
         this.name = name;
         this.manufacturer = manufacturer;
         this.baptismDate = baptismDate;
@@ -42,7 +42,7 @@ public abstract class Ship implements Serializable {
         this.history = history;
     }
 
-    public Ship (){
+    public Ship() {
 
     }
 
@@ -126,11 +126,11 @@ public abstract class Ship implements Serializable {
         this.maxSpeedKnots = maxSpeedKnots;
     }
 
-    public Operation[] getHistory() {
+    public OperationList getHistory() {
         return history;
     }
 
-    public void setHistory(Operation[] history) {
+    public void setHistory(OperationList history) {
         this.history = history;
     }
 }

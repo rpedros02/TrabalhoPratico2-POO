@@ -17,9 +17,9 @@ import java.io.Serializable;
  * Class that represents a specific type of {@link CrewMember}.
  */
 public class Captain extends CrewMember implements Serializable {
-    private String[] medals; // An Array of Strings that keeps track of a Captain's Medals
+    private final MedalList medals; // An Array of Strings that keeps track of a Captain's Medals
 
-    public Captain(String name, Patent patent, Date dateOfBirth, String[] medals) {
+    public Captain(String name, Patent patent, Date dateOfBirth, MedalList medals) {
         super(name, patent, dateOfBirth);
         this.medals = medals;
     }

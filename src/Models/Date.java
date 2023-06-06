@@ -10,12 +10,12 @@
 package Models;
 
 
+import Controllers.ShipController;
+import Exceptions.InvalidDateException;
+
 import java.io.Serializable;
 import java.time.Year;
 import java.util.Scanner;
-
-import Controllers.ShipController;
-import Exceptions.InvalidDateException;
 
 public class Date implements Serializable {
     private int day;
@@ -36,24 +36,6 @@ public class Date implements Serializable {
     }
 
     /**
-     * Checks if the given Date is valid using {@link  Date#isValid(int day, int month, int year)}.
-     *
-     * @param day   → Date Day - Int
-     * @param month → Date Month - Int
-     * @param year  → Date Year - Int
-     * @throws InvalidDateException in case the given Date is invalid.
-     */
-    private void checkDate(int day, int month, int year) throws InvalidDateException {
-        if (isValid(day, month, year)) {
-            this.day = day;
-            this.month = month;
-            this.year = year;
-        } else {
-            throw new InvalidDateException(day + "/" + month + "/" + year + ": Invalid Date");
-        }
-    }
-
-    /**
      * Verifies the Date by checking if the number of days matches the given month.
      * Also calls the method {@link Date#isLeap(int year)} to check if the year is Leap.
      *
@@ -62,7 +44,7 @@ public class Date implements Serializable {
      * @param year  → Given Year - Int
      * @return true if the Date is valid, otherwise false.
      */
-    private boolean isValid(int day, int month, int year) {
+    private static boolean isValid(int day, int month, int year) {
         boolean flag = false;
         if (year < 1900 || year > Year.now().getValue()) {
             return false;
@@ -143,19 +125,25 @@ public class Date implements Serializable {
      * @param year → Given Year - Int
      * @return true if the Year is leap, false otherwise.
      */
-    private boolean isLeap(int year) {
+    private static boolean isLeap(int year) {
         return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
     }
 
-    public static Date newDate(String label){
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Day of " + label);
-        int day = (int) ShipController.getOption(sc);
-        System.out.print("Month of " + label);
-        int month = (int) ShipController.getOption(sc);
-        System.out.print("Year of " + label);
-        int year = (int) ShipController.getOption(sc);
-        return new Date(day,month,year);
+    public static Date newDate(String label) throws InvalidDateException{
+        while(true){
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Day of " + label);
+            int day = (int) ShipController.getOption(sc);
+            System.out.print("Month of " + label);
+            int month = (int) ShipController.getOption(sc);
+            System.out.print("Year of " + label);
+            int year = (int) ShipController.getOption(sc);
+            if(isValid(day,month,year)){
+                return new Date(day, month, year);
+            }else{
+                throw new InvalidDateException("Invalid Date.");
+            }
+        }
     }
 
     /**

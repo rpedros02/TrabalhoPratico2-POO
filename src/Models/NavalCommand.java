@@ -16,12 +16,12 @@ import java.io.Serializable;
  */
 public class NavalCommand implements Serializable {
     private String name; // Naval Command's name
-    private CrewMember[] crewMembers; // List of Crew Members
-    private Captain[] captains; // List of Captains
+    private CrewList crewMembers; // List of Crew Members
+    private CaptainList captains; // List of Captains
     private FrigateList frigatesContainer; // List of Frigates
     private CorvetteList corvettes; // List of Corvettes
-    private SpeedBoat[] speedBoats; // List of Speed Boats
-    private Operation[] operationsContainer; // List of Operations
+    private SpeedBoatList speedBoats; // List of Speed Boats
+    private OperationList operationsContainer; // List of Operations
 
     public NavalCommand() {
     }
@@ -30,7 +30,7 @@ public class NavalCommand implements Serializable {
         setName(name);
     }
 
-    public NavalCommand(String name, CrewMember[] crewMembers, Captain[] captains, FrigateList frigates, CorvetteList corvettes, SpeedBoat[] speedBoats, Operation[] operationsContainer) {
+    public NavalCommand(String name, CrewList crewMembers, CaptainList captains, FrigateList frigates, CorvetteList corvettes, SpeedBoatList speedBoats, OperationList operationsContainer) {
         setName(name);
         setCrewMembers(crewMembers);
         setCaptains(captains);
@@ -48,19 +48,19 @@ public class NavalCommand implements Serializable {
         this.name = name;
     }
 
-    public CrewMember[] getCrewMembers() {
+    public CrewList getCrewMembers() {
         return crewMembers;
     }
 
-    public void setCrewMembers(CrewMember[] crewMembers) {
+    public void setCrewMembers(CrewList crewMembers) {
         this.crewMembers = crewMembers;
     }
 
-    public Captain[] getCaptains() {
+    public CaptainList getCaptains() {
         return captains;
     }
 
-    public void setCaptains(Captain[] captains) {
+    public void setCaptains(CaptainList captains) {
         this.captains = captains;
     }
 
@@ -77,19 +77,19 @@ public class NavalCommand implements Serializable {
         this.corvettes = corvettes;
     }
 
-    public SpeedBoat[] getSpeedBoats() {
+    public SpeedBoatList getSpeedBoats() {
         return speedBoats;
     }
 
-    public void setSpeedBoats(SpeedBoat[] speedBoats) {
+    public void setSpeedBoats(SpeedBoatList speedBoats) {
         this.speedBoats = speedBoats;
     }
 
-    public Operation[] getOperationsContainer() {
+    public OperationList getOperationsContainer() {
         return operationsContainer;
     }
 
-    public void setOperationsContainer(Operation[] operationsContainer) {
+    public void setOperationsContainer(OperationList operationsContainer) {
         this.operationsContainer = operationsContainer;
     }
 

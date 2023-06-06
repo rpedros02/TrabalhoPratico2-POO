@@ -9,8 +9,10 @@
  */
 package Controllers;
 
-import Data.DataOperations;
 import Enums.FrigateType;
+import Exceptions.FrigateNotFoundException;
+import Exceptions.InvalidDateException;
+import Exceptions.InvalidInputException;
 import Models.Date;
 import Models.Frigate;
 import Models.NavalCommand;
@@ -26,7 +28,7 @@ public class FrigateController {
      *
      * @param sc → Scanner to read the info
      */
-    public static void run(Scanner sc, NavalCommand navalCommand) {
+    public static void run(Scanner sc, NavalCommand navalCommand) throws InvalidInputException {
         int op;
         do {
             op = frigateMenu(sc);
@@ -34,9 +36,16 @@ public class FrigateController {
                 case 1 -> {
                     addFrigate(sc, navalCommand);
                 }
+                case 3 -> {
+                    System.out.print("Enter the Frigate's ID: ");
+                    try {
+                        searchFrigate(Integer.parseInt(sc.nextLine()), navalCommand);
+                    } catch (Exception e) {
+                        System.out.println("Invalid input " + e.getMessage().toLowerCase());
+                    }
+                }
                 case 4 -> {
                     listFrigates(navalCommand);
-
                 }
             }
         } while (op != 0);
@@ -69,6 +78,7 @@ public class FrigateController {
 
     /**
      * Method to request the user for the frigate type.
+     *
      * @param sc Scanner to read input.
      * @return the {@link FrigateType}.
      */
@@ -97,9 +107,21 @@ public class FrigateController {
         }
     }
 
+    public static void searchFrigate(int id, NavalCommand navalCommand) {
+        Frigate[] container = navalCommand.getFrigatesContainer().getContainer();
+        for (Frigate f : container) {
+            if (f.getId() == id) {
+                System.out.println(f);
+                return;
+            }
+        }
+        throw new FrigateNotFoundException("Frigate not found in the records.");
+    }
+
     /**
      * Method to request the data and create a new Frigate. See {@link Models.FrigateList#add(Frigate)} for the method that adds to the Frigate List.
-     * @param sc Scanner to read input.
+     *
+     * @param sc           Scanner to read input.
      * @param navalCommand The naval command to add the Frigate.
      */
     public static void addFrigate(Scanner sc, NavalCommand navalCommand) {
@@ -110,11 +132,34 @@ public class FrigateController {
         System.out.print("Frigate Manufacturer: ");
         newFrigate.setManufacturer(sc.nextLine());
         newFrigate.setFrigateType(getFrigateType(sc));
-        newFrigate.setBaptismDate(Date.newDate("Baptism Date"));
-        newFrigate.setLastInspection(Date.newDate("Last Inspection Date"));
-        newFrigate.setNextInspection(Date.newDate("Next Inspection Date"));
-        newFrigate.setLastMaintenance(Date.newDate("Last Maintenance Date"));
-        newFrigate.setNextMaintenance(Date.newDate("Next Maintenance Date"));
+        boolean flag = false;
+        while (!flag) {
+            try {
+                if (newFrigate.getBaptismDate() == null) {
+                    newFrigate.setBaptismDate(Date.newDate("Baptism Date"));
+                    flag = true;
+                }
+                if (newFrigate.getLastInspection() == null) {
+                    newFrigate.setLastInspection(Date.newDate("Last Inspection Date"));
+                    flag = true;
+                }
+                if (newFrigate.getNextInspection() == null) {
+                    newFrigate.setNextInspection(Date.newDate("Next Inspection Date"));
+                    flag = true;
+                }
+                if (newFrigate.getLastMaintenance() == null) {
+                    newFrigate.setLastMaintenance(Date.newDate("Last Maintenance Date"));
+                    flag = true;
+                }
+                if (newFrigate.getNextMaintenance() == null) {
+                    newFrigate.setNextMaintenance(Date.newDate("Next Maintenance Date"));
+                    flag = true;
+                }
+            } catch (InvalidDateException e) {
+                flag = false;
+                System.out.println(e.getMessage());
+            }
+        }
         System.out.print("Frigate Length (in meters)");
         newFrigate.setLengthInMeters(getOption(sc));
         System.out.print("Frigate Weight (in tons)");
@@ -139,6 +184,7 @@ public class FrigateController {
 
     /**
      * Method that iterates the {@link Models.FrigateList} and outputs all the instances.
+     *
      * @param navalCommand The naval command to iterate.
      */
     private static void listFrigates(NavalCommand navalCommand) {

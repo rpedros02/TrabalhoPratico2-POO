@@ -49,6 +49,14 @@ public class Frigate extends Ship implements Serializable {
         this.frigateType = frigateType;
     }
 
+    public EquipmentList getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(EquipmentList equipment) {
+        this.equipment = equipment;
+    }
+
     public static int getNextId() {
         File f = new File("navalCommandData.dat");
         if (f.exists()) {

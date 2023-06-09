@@ -25,6 +25,10 @@ public class EquipmentList implements Serializable {
         return container;
     }
 
+    /**
+     * Method that dynamically adds Equipment to the container;
+     * @param newEquipment - Equipment to add to the container.
+     */
     public void add(Equipment newEquipment) {
         if (nEquipments == container.length) {
             Equipment[] temp = new Equipment[nEquipments + 4];
@@ -34,4 +38,19 @@ public class EquipmentList implements Serializable {
         container[nEquipments++] = newEquipment;
     }
 
+    /**
+     * Method that dynamically delets a {@link Equipment} from the container;
+     * @param object - object to delete.
+     */
+    public void delete(Equipment object) {
+        Equipment[] temp = new Equipment[nEquipments];
+        for (int i = 0; i < (container.length - 1); i++) {
+            if (container[i] != null) {
+                if (container[i] != object) {
+                    temp[i] = container[i];
+                }
+            }
+        }
+        container = temp;
+    }
 }

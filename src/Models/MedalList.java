@@ -24,6 +24,10 @@ public class MedalList implements Serializable {
         return container;
     }
 
+    /**
+     * Method that dynamically adds a Medal to the container;
+     * @param newMedal - Medal to add to the container.
+     */
     public void add(String newMedal) {
         if (nMedals == container.length) {
             String[] temp = new String[nMedals + 4];
@@ -33,4 +37,19 @@ public class MedalList implements Serializable {
         container[nMedals++] = newMedal;
     }
 
+    /**
+     * Method that dynamically delets a Medal from the container;
+     * @param object - object to delete.
+     */
+    public void delete(String object) {
+        String[] temp = new String[nMedals];
+        for (int i = 0; i < (container.length - 1); i++) {
+            if (container[i] != null) {
+                if (!container[i].equals(object)) {
+                    temp[i] = container[i];
+                }
+            }
+        }
+        container = temp;
+    }
 }

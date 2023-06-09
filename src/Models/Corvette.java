@@ -34,7 +34,7 @@ public class Corvette extends Ship implements Serializable {
             Corvette[] container = DataOperations.load().getCorvetteContainer().getContainer();
             for (int i = container.length - 1; i > 0; i--) {
                 if (container[i] != null) {
-                    return container[i].getID() + 1;
+                    return container[i].getId() + 1;
                 }
             }
             return 0;
@@ -47,7 +47,7 @@ public class Corvette extends Ship implements Serializable {
         return corvetteType;
     }
 
-    public int getID() {
+    public int getId() {
         return id;
     }
 

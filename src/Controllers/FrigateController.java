@@ -48,10 +48,22 @@ public class FrigateController {
                     try {
                         System.out.println(searchFrigate(Integer.parseInt(sc.nextLine()), navalCommand));
                     } catch (Exception e) {
-                        System.out.println("Invalid input " + e.getMessage().toLowerCase());
+                        System.out.println(e.getMessage().toLowerCase());
                     }
                 }
                 case 4 -> listFrigates(navalCommand);
+                case 5 -> {
+                    System.out.print("Enter the Frigate's ID: ");
+                    try {
+                        navalCommand.getFrigatesContainer().delete(searchFrigate(Integer.parseInt(sc.nextLine()), navalCommand));
+                        DataOperations.save(navalCommand);
+                    } catch (Exception e) {
+                        System.out.println("Invalid input " + e.getMessage().toLowerCase());
+                    }
+                }
+                case 0 -> {
+                }
+                default -> System.out.println("Input not recognized.");
             }
         } while (op != 0);
     }
@@ -82,7 +94,8 @@ public class FrigateController {
 
     /**
      * Method to Edit a {@link Frigate} instance.
-     * @param frigate {@link Frigate} instance to edit.
+     *
+     * @param frigate      {@link Frigate} instance to edit.
      * @param navalCommand {@link NavalCommand} to save.
      */
     public static void editFrigate(Frigate frigate, NavalCommand navalCommand) {
@@ -226,7 +239,7 @@ public class FrigateController {
                 return f;
             }
         }
-        throw new FrigateNotFoundException("Frigate not found in the records.");
+        throw new FrigateNotFoundException("id not found in the records.");
     }
 
 
@@ -291,6 +304,7 @@ public class FrigateController {
 //            }
 //        }
         newFrigate.setId(Frigate.getNextId());
+        System.out.println("New Frigate ID: " + newFrigate.getId());
         navalCommand.getFrigatesContainer().add(newFrigate);
         DataOperations.save(navalCommand);
     }

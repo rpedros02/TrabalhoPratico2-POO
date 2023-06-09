@@ -23,6 +23,10 @@ public class SpeedBoatList implements Serializable {
         return container;
     }
 
+    /**
+     * Method that dynamically adds an {@link SpeedBoat} to the container;
+     * @param newSpeedBoat - {@link SpeedBoat} to add to the container.
+     */
     public void add(SpeedBoat newSpeedBoat) {
         if (nSpeedBoats == container.length) {
             SpeedBoat[] temp = new SpeedBoat[nSpeedBoats + 4];
@@ -30,5 +34,21 @@ public class SpeedBoatList implements Serializable {
             container = temp;
         }
         container[nSpeedBoats++] = newSpeedBoat;
+    }
+
+    /**
+     * Method that dynamically delets a {@link SpeedBoat} from the container;
+     * @param object - object to delete.
+     */
+    public void delete(SpeedBoat object) {
+        SpeedBoat[] temp = new SpeedBoat[nSpeedBoats];
+        for (int i = 0; i < (container.length - 1); i++) {
+            if (container[i] != null) {
+                if (container[i].getId() != object.getId()) {
+                    temp[i] = container[i];
+                }
+            }
+        }
+        container = temp;
     }
 }

@@ -23,6 +23,10 @@ public class CorvetteList implements Serializable {
         return container;
     }
 
+    /**
+     * Method that dynamically adds a {@link Corvette} to the container;
+     * @param newCorvette - {@link Corvette} to add to the container.
+     */
     public void add(Corvette newCorvette) {
         if (nCorvettes == container.length) {
             Corvette[] temp = new Corvette[nCorvettes + 4];
@@ -31,4 +35,21 @@ public class CorvetteList implements Serializable {
         }
         container[nCorvettes++] = newCorvette;
     }
+
+    /**
+     * Method that dynamically delets a {@link Corvette} from the container;
+     * @param object - object to delete.
+     */
+    public void delete(Corvette object) {
+        Corvette[] temp = new Corvette[nCorvettes];
+        for (int i = 0; i < (container.length - 1); i++) {
+            if (container[i] != null) {
+                if (container[i].getId() != object.getId()) {
+                    temp[i] = container[i];
+                }
+            }
+        }
+        container = temp;
+    }
+
 }

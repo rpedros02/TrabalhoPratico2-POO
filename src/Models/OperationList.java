@@ -23,6 +23,10 @@ public class OperationList implements Serializable {
         return container;
     }
 
+    /**
+     * Method that dynamically adds an {@link Operation} to the container;
+     * @param newOperation - {@link Operation} to add to the container.
+     */
     public void add(Operation newOperation) {
         if (nOperations == container.length) {
             Operation[] temp = new Operation[nOperations + 4];
@@ -30,5 +34,21 @@ public class OperationList implements Serializable {
             container = temp;
         }
         container[nOperations++] = newOperation;
+    }
+
+    /**
+     * Method that dynamically delets an {@link Operation} from the container;
+     * @param object - object to delete.
+     */
+    public void delete(Operation object) {
+        Operation[] temp = new Operation[nOperations];
+        for (int i = 0; i < (container.length - 1); i++) {
+            if (container[i] != null) {
+                if (container[i].getId() != object.getId()) {
+                    temp[i] = container[i];
+                }
+            }
+        }
+        container = temp;
     }
 }

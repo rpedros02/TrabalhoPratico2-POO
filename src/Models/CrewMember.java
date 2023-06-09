@@ -30,6 +30,10 @@ public class CrewMember implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

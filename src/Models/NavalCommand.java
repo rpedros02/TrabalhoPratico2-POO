@@ -16,28 +16,30 @@ import java.io.Serializable;
  */
 public class NavalCommand implements Serializable {
     private String name; // Naval Command's name
-    private CrewList crewMembers; // List of Crew Members
-    private CaptainList captains; // List of Captains
+    private CrewList crewMemberContainer; // List of Crew Members
+    private CaptainList captainContainer; // List of Captains
     private FrigateList frigatesContainer; // List of Frigates
-    private CorvetteList corvettes; // List of Corvettes
-    private SpeedBoatList speedBoats; // List of Speed Boats
+    private CorvetteList corvetteContainer; // List of Corvettes
+    private SpeedBoatList speedBoatContainer; // List of Speed Boats
     private OperationList operationsContainer; // List of Operations
 
     public NavalCommand() {
+        setCrewMemberContainer(new CrewList());
+        setCaptainContainer(new CaptainList());
+        setFrigatesContainer(new FrigateList());
+        setCorvetteContainer(new CorvetteList());
+        setSpeedBoatContainer(new SpeedBoatList());
+        setOperationsContainer(new OperationList());
     }
 
     public NavalCommand(String name) {
         setName(name);
-    }
-
-    public NavalCommand(String name, CrewList crewMembers, CaptainList captains, FrigateList frigates, CorvetteList corvettes, SpeedBoatList speedBoats, OperationList operationsContainer) {
-        setName(name);
-        setCrewMembers(crewMembers);
-        setCaptains(captains);
-        setFrigatesContainer(frigates);
-        setCorvettes(corvettes);
-        setSpeedBoats(speedBoats);
-        setOperationsContainer(operationsContainer);
+        setCrewMemberContainer(new CrewList());
+        setCaptainContainer(new CaptainList());
+        setFrigatesContainer(new FrigateList());
+        setCorvetteContainer(new CorvetteList());
+        setSpeedBoatContainer(new SpeedBoatList());
+        setOperationsContainer(new OperationList());
     }
 
     public String getName() {
@@ -48,20 +50,20 @@ public class NavalCommand implements Serializable {
         this.name = name;
     }
 
-    public CrewList getCrewMembers() {
-        return crewMembers;
+    public CrewList getCrewMemberContainer() {
+        return crewMemberContainer;
     }
 
-    public void setCrewMembers(CrewList crewMembers) {
-        this.crewMembers = crewMembers;
+    public void setCrewMemberContainer(CrewList crewMemberContainer) {
+        this.crewMemberContainer = crewMemberContainer;
     }
 
-    public CaptainList getCaptains() {
-        return captains;
+    public CaptainList getCaptainContainer() {
+        return captainContainer;
     }
 
-    public void setCaptains(CaptainList captains) {
-        this.captains = captains;
+    public void setCaptainContainer(CaptainList captainContainer) {
+        this.captainContainer = captainContainer;
     }
 
 
@@ -69,20 +71,20 @@ public class NavalCommand implements Serializable {
         this.frigatesContainer = frigatesContainer;
     }
 
-    public CorvetteList getCorvettes() {
-        return corvettes;
+    public CorvetteList getCorvetteContainer() {
+        return corvetteContainer;
     }
 
-    public void setCorvettes(CorvetteList corvettes) {
-        this.corvettes = corvettes;
+    public void setCorvetteContainer(CorvetteList corvetteContainer) {
+        this.corvetteContainer = corvetteContainer;
     }
 
-    public SpeedBoatList getSpeedBoats() {
-        return speedBoats;
+    public SpeedBoatList getSpeedBoatContainer() {
+        return speedBoatContainer;
     }
 
-    public void setSpeedBoats(SpeedBoatList speedBoats) {
-        this.speedBoats = speedBoats;
+    public void setSpeedBoatContainer(SpeedBoatList speedBoatContainer) {
+        this.speedBoatContainer = speedBoatContainer;
     }
 
     public OperationList getOperationsContainer() {

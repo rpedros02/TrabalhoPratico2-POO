@@ -18,9 +18,9 @@ import java.time.Year;
 import java.util.Scanner;
 
 public class Date implements Serializable {
-    private int day;
-    private int month;
-    private int year;
+    private final int day;
+    private final int month;
+    private final int year;
 
     /**
      * Date Constructor.
@@ -129,21 +129,20 @@ public class Date implements Serializable {
         return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
     }
 
-    public static Date newDate(String label) throws InvalidDateException{
-        while(true){
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Day of " + label);
-            int day = (int) ShipController.getOption(sc);
-            System.out.print("Month of " + label);
-            int month = (int) ShipController.getOption(sc);
-            System.out.print("Year of " + label);
-            int year = (int) ShipController.getOption(sc);
-            if(isValid(day,month,year)){
-                return new Date(day, month, year);
-            }else{
-                throw new InvalidDateException("Invalid Date.");
-            }
+    public static Date newDate(String label) throws InvalidDateException {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Day of " + label);
+        int day = (int) ShipController.getOption(sc);
+        System.out.print("Month of " + label);
+        int month = (int) ShipController.getOption(sc);
+        System.out.print("Year of " + label);
+        int year = (int) ShipController.getOption(sc);
+        if (isValid(day, month, year)) {
+            return new Date(day, month, year);
+        } else {
+            throw new InvalidDateException("Invalid Date.");
         }
+
     }
 
     /**

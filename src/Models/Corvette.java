@@ -31,7 +31,7 @@ public class Corvette extends Ship implements Serializable {
     public static int getNextId() {
         File f = new File("navalCommandData.dat");
         if (f.exists()) {
-            Corvette[] container = DataOperations.load().getCorvettes().getContainer();
+            Corvette[] container = DataOperations.load().getCorvetteContainer().getContainer();
             for (int i = container.length - 1; i > 0; i--) {
                 if (container[i] != null) {
                     return container[i].getID() + 1;

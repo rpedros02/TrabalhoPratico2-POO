@@ -14,12 +14,8 @@ import Enums.*;
 import Models.*;
 
 public class MockData {
-    private static final int FRIGATE_INITIAL_NUMBER = 4;
-    private static final int CORVETTE_INITIAL_NUMBER = 5;
-    private static final int SPEEDBOAT_INITIAL_NUMBER = 8;
     private static final int CREWMEMBER_INITIAL_NUMBER = 20;
     private static final int CAPTAIN_INITIAL_NUMBER = 5;
-    private static final int OPERATION_INITIAL_NUMBER = 20;
     private static final String[] SHIPS1STNAMES = {"Apollo", "Crusader", "Land", "Savage", "Buggy", "Lag", "Raptor", "Bit", "Air", "Shop", "Snow", "Ice", "Black"};
     private static final String[] SHIPS2NDNAMES = {"Destroyer", "Constructor", "House", "Ship", "Commander", "Rescuer", "Racer", "Tigers", "Monkeys"};
     private static final String[] MANUFACTURERS = {"General Dynamics", "BAE Systems", "Naval Group SA", "United ShipBuilding"};
@@ -176,19 +172,19 @@ public class MockData {
 
     private static void insertFrigates(FrigateList container, OperationList operationsContainer) {
         for (int i = 0; i < container.getContainer().length; i++) {
-            container.add(new Frigate(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), (double) genRandomInt(75, 150), (double) genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genFrigateType(), genEquipmentList()));
+            container.add(new Frigate(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), genRandomInt(75, 150), genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genFrigateType(), genEquipmentList()));
         }
     }
 
     private static void insertCorvettes(CorvetteList container, OperationList operationsContainer) {
         for (int i = 0; i < container.getContainer().length; i++) {
-            container.add(new Corvette(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), (double) genRandomInt(75, 150), (double) genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genCorvetteType(), genRandomInt(1, 20)));
+            container.add(new Corvette(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), genRandomInt(75, 150), genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genCorvetteType(), genRandomInt(1, 20)));
         }
     }
 
     private static void insertSpeedBoats(SpeedBoatList container, OperationList operationsContainer) {
         for (int i = 0; i < container.getContainer().length; i++) {
-            container.add(new SpeedBoat(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), (double) genRandomInt(75, 150), (double) genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genRandomInt(1, 20)));
+            container.add(new SpeedBoat(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), genRandomInt(75, 150), genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genRandomInt(1, 20)));
         }
     }
 
@@ -197,25 +193,19 @@ public class MockData {
     }
 
     public static void generateData(NavalCommand navalCommand) {
-        navalCommand.setCaptains(new CaptainList());
-        navalCommand.setCorvettes(new CorvetteList());
-        navalCommand.setCrewMembers(new CrewList());
-        navalCommand.setFrigatesContainer(new FrigateList());
-        navalCommand.setSpeedBoats(new SpeedBoatList());
-        navalCommand.setOperationsContainer(new OperationList());
         navalCommand.setName("Naval Command - MOCK");
         insertFrigates(navalCommand.getFrigatesContainer(), navalCommand.getOperationsContainer());
-        insertCorvettes(navalCommand.getCorvettes(), navalCommand.getOperationsContainer());
-        insertSpeedBoats(navalCommand.getSpeedBoats(), navalCommand.getOperationsContainer());
-        insertCaptains(navalCommand.getCaptains());
-        insertCrewMember(navalCommand.getCrewMembers());
+        insertCorvettes(navalCommand.getCorvetteContainer(), navalCommand.getOperationsContainer());
+        insertSpeedBoats(navalCommand.getSpeedBoatContainer(), navalCommand.getOperationsContainer());
+        insertCaptains(navalCommand.getCaptainContainer());
+        insertCrewMember(navalCommand.getCrewMemberContainer());
         for (int k = 0; k < navalCommand.getOperationsContainer().getContainer().length - 1; k++) {
             CrewList crew = new CrewList();
             for (int i = 0; i < genRandomInt(4, 9); i++) {
-                crew.add(navalCommand.getCrewMembers().getContainer()[genRandomInt(0, navalCommand.getCrewMembers().getContainer().length - 1)]);
+                crew.add(navalCommand.getCrewMemberContainer().getContainer()[genRandomInt(0, navalCommand.getCrewMemberContainer().getContainer().length - 1)]);
             }
-            CrewMember approving = navalCommand.getCrewMembers().getContainer()[genRandomInt(0, navalCommand.getCrewMembers().getContainer().length - 1)];
-            Captain captain = navalCommand.getCaptains().getContainer()[genRandomInt(0, navalCommand.getCaptains().getContainer().length - 1)];
+            CrewMember approving = navalCommand.getCrewMemberContainer().getContainer()[genRandomInt(0, navalCommand.getCrewMemberContainer().getContainer().length - 1)];
+            Captain captain = navalCommand.getCaptainContainer().getContainer()[genRandomInt(0, navalCommand.getCaptainContainer().getContainer().length - 1)];
             insertOperation(navalCommand.getOperationsContainer(), captain, approving, crew);
         }
     }

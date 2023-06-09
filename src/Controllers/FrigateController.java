@@ -63,7 +63,7 @@ public class FrigateController {
      * @return user's option
      */
     public static int frigateMenu(Scanner sc) {
-        int option = -1;
+        int option;
         do {
             System.out.println("\nFrigate Menu");
             System.out.println("1. Add Frigate;");
@@ -189,7 +189,7 @@ public class FrigateController {
      * @return the {@link FrigateType}.
      */
     public static FrigateType getFrigateType(Scanner sc) {
-        int op = -1;
+        int op;
         do {
             System.out.println("Enter the Frigate Type: ");
             System.out.println("1. Anti-Submarine;");

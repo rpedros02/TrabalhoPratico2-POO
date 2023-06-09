@@ -40,16 +40,12 @@ public class Main {
             }
         }
         navalCommand = DataOperations.load();
-        int option = -1;
+        int option;
         do {
             option = mainMenu();
             switch (option) {
-                case 1 -> {
-                    navalMenu(navalCommand);
-                }
-                case 2 -> {
-                    ShipController.run(navalCommand);
-                }
+                case 1 -> navalMenu(navalCommand);
+                case 2 -> ShipController.run(navalCommand);
             }
         } while (option != 0);
         System.out.println("\b--Goodbye!--");
@@ -64,7 +60,7 @@ public class Main {
      */
     private static int initialMenu() throws InvalidNumberException {
         Scanner sc = new Scanner(System.in);
-        int option = -1;
+        int option;
         do {
             System.out.println("\nData Menu");
             System.out.println("1. Generate MOCK Naval Command;");
@@ -83,7 +79,7 @@ public class Main {
     private static int mainMenu() throws InvalidNumberException {
         Scanner sc = new Scanner(System.in);
         NavalCommand navalCommand = DataOperations.load();
-        int option = -1;
+        int option;
         do {
             System.out.println("\nMain Menu");
             System.out.println("Naval Command: " + navalCommand.getName());
@@ -102,7 +98,7 @@ public class Main {
      * The only editable attribute is its name, so the only option given to the user is if they want to edit the name or not.
      *
      * @param navalCommand → The Naval Command to edit.
-     * @throws InvalidInputException when the input doesnt satisfy the required.
+     * @throws InvalidInputException when the input doesn't satisfy the required.
      */
     private static void navalMenu(NavalCommand navalCommand) {
         Scanner sc = new Scanner(System.in);

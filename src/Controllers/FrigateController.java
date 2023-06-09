@@ -14,9 +14,7 @@ import Enums.FrigateType;
 import Exceptions.FrigateNotFoundException;
 import Exceptions.InvalidDateException;
 import Exceptions.InvalidInputException;
-import Models.Date;
-import Models.Frigate;
-import Models.NavalCommand;
+import Models.*;
 
 import java.util.Scanner;
 
@@ -291,18 +289,26 @@ public class FrigateController {
         newFrigate.setWeightInTons(getOption(sc));
         System.out.print("Frigate Max Speed (in knots)");
         newFrigate.setMaxSpeedKnots((int) getOption(sc));
-//        System.out.print("Add Operation History? (y - yes | n - no): ");
-//        switch (sc.nextLine().toLowerCase()) {
-//            case "y" -> {
-//
-//            }
-//            case "n" -> {
-//
-//            }
-//            default -> {
-//                System.out.println("Invalid Answer, not adding Operations.");
-//            }
-//        }
+/*
+        System.out.print("Add Operation History? (y - yes | n - no): ");
+        switch (sc.nextLine().toLowerCase()) {
+            case "y" -> {
+
+            }
+            case "n" ->newFrigate.setHistory(new OperationList());
+            default -> {
+                System.out.println("Invalid Answer, not adding Operations.");
+            }
+        }
+        System.out.print("Add Equipment? (y - yes | n - no): ");
+        switch (sc.nextLine().toLowerCase()) {
+            case "y" -> {
+
+            }
+            case "n" -> newFrigate.setEquipment(new EquipmentList());
+            default -> System.out.println("Invalid Answer, not adding Operations.");
+        }
+*/
         newFrigate.setId(Frigate.getNextId());
         System.out.println("New Frigate ID: " + newFrigate.getId());
         navalCommand.getFrigatesContainer().add(newFrigate);

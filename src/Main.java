@@ -2,12 +2,10 @@
  * Nome: Rui Pedro Correia da Silva
  * Número: 8210694
  * Turma: LSIG
- *
- * Nome: Miguel Correia da Silva
- * Número: 8221002
- * Turma: LSIG
  */
 
+import Controllers.CrewController;
+import Controllers.OperationController;
 import Controllers.ShipController;
 import Data.DataOperations;
 import Data.MockData;
@@ -46,6 +44,8 @@ public class Main {
             switch (option) {
                 case 1 -> navalMenu(navalCommand);
                 case 2 -> ShipController.run(navalCommand);
+                case 3 -> CrewController.run(navalCommand);
+                case 4 -> OperationController.run(navalCommand);
             }
         } while (option != 0);
         System.out.println("\b--Goodbye!--");

@@ -1,3 +1,8 @@
+/*
+ * Nome: Rui Pedro Correia da Silva
+ * Número: 8210694
+ * Turma: LSIG
+ */
 package Data;
 
 import Models.NavalCommand;

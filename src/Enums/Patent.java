@@ -2,10 +2,6 @@
  * Nome: Rui Pedro Correia da Silva
  * Número: 8210694
  * Turma: LSIG
- *
- * Nome: Miguel Correia da Silva
- * Número: 8221002
- * Turma: LSIG
  */
 package Enums;
 
@@ -26,7 +22,7 @@ public enum Patent implements Serializable {
      * @param patent
      * @return patent in current language
      */
-    public String toString(Patent patent) {
+    public static String toString(Patent patent) {
         switch (patent) {
             case PRACA -> {
                 return "Praça";

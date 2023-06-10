@@ -2,10 +2,6 @@
  * Nome: Rui Pedro Correia da Silva
  * Número: 8210694
  * Turma: LSIG
- *
- * Nome: Miguel Correia da Silva
- * Número: 8221002
- * Turma: LSIG
  */
 package Data;
 
@@ -158,6 +154,20 @@ public class MockData {
         }
     }
 
+    private static OperationPorpuse genPorpuse() {
+        switch (genRandomInt(1, 3)) {
+            case 1 -> {
+                return OperationPorpuse.NATIONAL;
+            }
+            case 2 -> {
+                return OperationPorpuse.OTAN;
+            }
+            default -> {
+                return OperationPorpuse.UN;
+            }
+        }
+    }
+
     private static void insertCrewMember(CrewList container) {
         for (int i = 0; i < CREWMEMBER_INITIAL_NUMBER; i++) {
             container.add(genCrewMember());
@@ -189,7 +199,7 @@ public class MockData {
     }
 
     private static void insertOperation(OperationList container, Captain captain, CrewMember approving, CrewList crew) {
-        container.add(new Operation(genDate(), genDate(), "MOCK MISSION", genDate(), captain, approving, crew, genOperationType()));
+        container.add(new Operation(genDate(), genDate(), "MOCK MISSION", genDate(), captain, approving, crew, genOperationType(),genPorpuse()));
     }
 
     public static void generateData(NavalCommand navalCommand) {

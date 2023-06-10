@@ -2,10 +2,6 @@
  * Nome: Rui Pedro Correia da Silva
  * Número: 8210694
  * Turma: LSIG
- *
- * Nome: Miguel Correia da Silva
- * Número: 8221002
- * Turma: LSIG
  */
 package Controllers;
 
@@ -18,6 +14,7 @@ import Models.*;
 
 import java.util.Scanner;
 
+import static Controllers.OperationController.searchOperation;
 import static Controllers.ShipController.getOption;
 
 public class FrigateController {
@@ -80,7 +77,7 @@ public class FrigateController {
             System.out.println("2. Edit Frigate;");
             System.out.println("3. Search Frigate;");
             System.out.println("4. List Frigates;");
-            System.out.println("5. Delete Frigates;");
+            System.out.println("5. Delete Frigate;");
             System.out.println("0. Back;");
             option = (int) getOption(sc);
             if (option < 0 || option > 5) {
@@ -129,7 +126,6 @@ public class FrigateController {
             }
             case 3 -> {
                 System.out.println("Current Baptism Date: " + frigate.getBaptismDate().toString());
-                System.out.println("New Baptism: ");
                 frigate.setBaptismDate(Date.newDate("new Baptism Date"));
             }
             case 4 -> {
@@ -250,32 +246,34 @@ public class FrigateController {
     public static void addFrigate(Scanner sc, NavalCommand navalCommand) {
         Frigate newFrigate = new Frigate();
         System.out.println("\n-Creating Frigate-");
-        System.out.print("Frigate Name: ");
+        newFrigate.setId(Frigate.getNextId());
+        System.out.println("New Frigate ID: " + newFrigate.getId());
+        System.out.print("Enter new Frigate's Name: ");
         newFrigate.setName(sc.nextLine());
-        System.out.print("Frigate Manufacturer: ");
+        System.out.print("Enter new Frigate's Manufacturer: ");
         newFrigate.setManufacturer(sc.nextLine());
         newFrigate.setFrigateType(getFrigateType(sc));
         boolean flag = false;
         while (!flag) {
             try {
                 if (newFrigate.getBaptismDate() == null) {
-                    newFrigate.setBaptismDate(Date.newDate("Baptism Date"));
+                    newFrigate.setBaptismDate(Date.newDate("Frigate's Baptism Date"));
                     flag = true;
                 }
                 if (newFrigate.getLastInspection() == null) {
-                    newFrigate.setLastInspection(Date.newDate("Last Inspection Date"));
+                    newFrigate.setLastInspection(Date.newDate("Frigate's Last Inspection Date"));
                     flag = true;
                 }
                 if (newFrigate.getNextInspection() == null) {
-                    newFrigate.setNextInspection(Date.newDate("Next Inspection Date"));
+                    newFrigate.setNextInspection(Date.newDate("Frigate's Next Inspection Date"));
                     flag = true;
                 }
                 if (newFrigate.getLastMaintenance() == null) {
-                    newFrigate.setLastMaintenance(Date.newDate("Last Maintenance Date"));
+                    newFrigate.setLastMaintenance(Date.newDate("Frigate's Last Maintenance Date"));
                     flag = true;
                 }
                 if (newFrigate.getNextMaintenance() == null) {
-                    newFrigate.setNextMaintenance(Date.newDate("Next Maintenance Date"));
+                    newFrigate.setNextMaintenance(Date.newDate("Frigate's Next Maintenance Date"));
                     flag = true;
                 }
             } catch (InvalidDateException e) {
@@ -283,34 +281,35 @@ public class FrigateController {
                 System.out.println(e.getMessage());
             }
         }
-        System.out.print("Frigate Length (in meters)");
+        System.out.print("Enter new Frigate's Length (in meters)");
         newFrigate.setLengthInMeters(getOption(sc));
-        System.out.print("Frigate Weight (in tons)");
+        System.out.print("Enter new Frigate's Weight (in tons)");
         newFrigate.setWeightInTons(getOption(sc));
-        System.out.print("Frigate Max Speed (in knots)");
+        System.out.print("Enter new Frigate's Max Speed (in knots)");
         newFrigate.setMaxSpeedKnots((int) getOption(sc));
-/*
-        System.out.print("Add Operation History? (y - yes | n - no): ");
-        switch (sc.nextLine().toLowerCase()) {
-            case "y" -> {
-
+        System.out.print("Enter how many Operations the ship has: ");
+        int count = 0;
+        try{
+            int nOp = Integer.parseInt(sc.nextLine());
+            for(int i = 0; i< nOp; i++){
+                System.out.print("Enter the Operation ID: ");
+                newFrigate.getHistory().add(searchOperation(Integer.parseInt(sc.nextLine()),navalCommand));
+                count++;
             }
-            case "n" ->newFrigate.setHistory(new OperationList());
-            default -> {
-                System.out.println("Invalid Answer, not adding Operations.");
-            }
+            System.out.println("Added " + count + " operations.");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
+/*
         System.out.print("Add Equipment? (y - yes | n - no): ");
         switch (sc.nextLine().toLowerCase()) {
             case "y" -> {
 
             }
             case "n" -> newFrigate.setEquipment(new EquipmentList());
-            default -> System.out.println("Invalid Answer, not adding Operations.");
+            default -> System.out.println("Invalid Answer, not adding Equipment.");
         }
 */
-        newFrigate.setId(Frigate.getNextId());
-        System.out.println("New Frigate ID: " + newFrigate.getId());
         navalCommand.getFrigatesContainer().add(newFrigate);
         DataOperations.save(navalCommand);
     }

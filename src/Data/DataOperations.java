@@ -19,6 +19,10 @@ import static java.nio.file.StandardOpenOption.CREATE;
 public class DataOperations {
     static final String NAVAL_COMMAND_FILE = "navalCommandData.dat";
 
+    /**
+     * Loads the Data from the file 'navalCommandData.dat'
+     * @return the read NavalC Command
+     */
     public static NavalCommand load() {
         NavalCommand navalCommand = null;
         Path file = Paths.get(NAVAL_COMMAND_FILE);
@@ -32,6 +36,10 @@ public class DataOperations {
         return navalCommand;
     }
 
+    /**
+     * Saves the Naval Command into the file. If doesn´t exists, creates it.
+     * @param navalCommand Naval command to save
+     */
     public static void save(NavalCommand navalCommand) {
         Path file = Paths.get(NAVAL_COMMAND_FILE);
         try {

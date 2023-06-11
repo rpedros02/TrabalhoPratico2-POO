@@ -20,6 +20,10 @@ import static Controllers.ShipController.getOption;
 
 public class OperationController {
 
+    /**
+     * Method to run the Operation Controller
+     * @param navalCommand Naval command to use
+     */
     public static void run(NavalCommand navalCommand) {
         Scanner sc = new Scanner(System.in);
         int op;
@@ -60,6 +64,11 @@ public class OperationController {
         } while (op != 0);
     }
 
+    /**
+     * Operation Main Menu
+     * @param sc Scanner for inputs
+     * @return user's option
+     */
     public static int operationMenu(Scanner sc) {
         int option;
         do {
@@ -150,6 +159,11 @@ public class OperationController {
         DataOperations.save(navalCommand);
     }
 
+    /**
+     * Get user input for {@link OperationType}
+     * @param sc Scanner for inputs
+     * @return user's {@link OperationType}
+     */
     public static OperationType getOperationType(Scanner sc) {
         int op;
         do {
@@ -187,6 +201,11 @@ public class OperationController {
         }
     }
 
+    /**
+     * Get user input for {@link OperationPorpuse}
+     * @param sc Scanner for inputs
+     * @return user's {@link OperationPorpuse}
+     */
     public static OperationPorpuse getOperationPorpuse(Scanner sc) {
         int op;
         do {

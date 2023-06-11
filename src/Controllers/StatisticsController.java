@@ -1,9 +1,15 @@
+/*
+ * Nome: Rui Pedro Correia da Silva
+ * Número: 8210694
+ * Turma: LSIG
+ */
 package Controllers;
 
 import Enums.OperationPorpuse;
 import Enums.Patent;
 import Models.*;
 
+import java.time.Year;
 import java.util.Scanner;
 
 import static Controllers.CorvetteController.searchCorvette;
@@ -15,29 +21,45 @@ import static Controllers.SpeedBoatController.searchSpeedBoat;
 
 public class StatisticsController {
 
+    /**
+     * Method to run the Statistics Controller
+     *
+     * @param sc           Scanner for inputs
+     * @param navalCommand Naval Command to use
+     */
     public static void run(Scanner sc, NavalCommand navalCommand) {
         int option;
         do {
             switch (option = menu(sc)) {
                 case 1 -> shipsBaptized(sc, navalCommand);
                 case 2 -> operationsPerShip(sc, navalCommand);
-                case 3 -> operationsPerPorpuse(sc, navalCommand);
-                case 4 -> operationPerCrewMember(sc, navalCommand);
+                case 3 -> avgOperationPerShipType(navalCommand);
+                case 4 -> operationsPerPorpuse(sc, navalCommand);
+                case 5 -> estimatedTimeList(sc, navalCommand);
+                case 6 -> operationPerCrewMember(sc, navalCommand);
             }
         } while (option != 0);
     }
 
+    /**
+     * Statistics Main Menu
+     *
+     * @param sc Scanner for inputs
+     * @return user's option
+     */
     public static int menu(Scanner sc) {
         int option;
         do {
             System.out.println("\nStatistics Menu");
             System.out.println("1. Ships Baptized in the same year;"); //Point a. on Requisites.
             System.out.println("2. Operations per Ship"); //Point b. on Requisites
-            System.out.println("3. Operations per Porpuse;"); //Point d. on Requisites
-            System.out.println("4. Operations per Crew Member;"); // Point f. on Rquisites
+            System.out.println("3. Avg number of Operations per Ship Type;"); // Pointt c. on Requisites
+            System.out.println("4. Operations per Porpuse;"); //Point d. on Requisites
+            System.out.println("5. Ships per Estimated Life Span;");
+            System.out.println("6. Operations per Crew Member;"); // Point f. on Rquisites
             System.out.println("0. Back;");
             option = (int) getOption(sc);
-        } while (option < 0 || option > 3);
+        } while (option < 0 || option > 6);
         return option;
     }
 
@@ -157,6 +179,34 @@ public class StatisticsController {
     }
 
     /**
+     * Complies with point c. on requisites
+     *
+     * @param navalCommand Naval Command to use
+     */
+    public static void avgOperationPerShipType(NavalCommand navalCommand) {
+        double avg;
+        int sum = 0;
+        for (Frigate f : navalCommand.getFrigatesContainer().getContainer()) {
+            sum += f.getHistory().getLength();
+        }
+        avg = (double) sum / navalCommand.getFrigatesContainer().getLength();
+        sum = 0;
+        System.out.println("\nAverage Number of Operations per Frigate: " + avg);
+        for (Corvette c : navalCommand.getCorvetteContainer().getContainer()) {
+            sum += c.getHistory().getLength();
+        }
+        avg = (double) sum / navalCommand.getCorvetteContainer().getLength();
+        System.out.println("\nAverage Number of Operations per Corvette: " + avg);
+        sum = 0;
+        for (SpeedBoat sb : navalCommand.getSpeedBoatContainer().getContainer()) {
+            sum += sb.getHistory().getLength();
+        }
+        avg = (double) sum / navalCommand.getSpeedBoatContainer().getLength();
+        System.out.println("\nAverage Number of Operations per SpeedBoat: " + avg);
+
+    }
+
+    /**
      * Method that complies with point d on requisites
      *
      * @param sc           Scanner
@@ -227,6 +277,13 @@ public class StatisticsController {
         }
     }
 
+    /**
+     * Checks if a given {@link CrewMember} is on an {@link Operation#getOperationCrew()}
+     *
+     * @param crewMember Crew Member to compare
+     * @param o          operation to search in
+     * @return true if the Crew Member is on the Operation, false otherwise.
+     */
     public static boolean crewMemberOnOperation(CrewMember crewMember, Operation o) {
         boolean flag = false;
         for (CrewMember c : o.getOperationCrew().getContainer()) {
@@ -238,6 +295,54 @@ public class StatisticsController {
         return flag;
     }
 
+    /**
+     * Complies with point e. on requisites.
+     *
+     * @param sc           Scanner to read input
+     * @param navalCommand Naval Command to iterate
+     */
+    public static void estimatedTimeList(Scanner sc, NavalCommand navalCommand) {
+        try {
+            System.out.println("Enter the life span to search: ");
+            int lifeSpan = Integer.parseInt(sc.nextLine());
+            FrigateList frigateList = new FrigateList();
+            for (Frigate f : navalCommand.getFrigatesContainer().getContainer()) {
+                if (f.getNextMaintenance().getYear() < Year.now().getValue() + lifeSpan) {
+                    frigateList.add(f);
+                }
+            }
+            for (Frigate f : frigateList.getContainer()) {
+                System.out.println(f);
+            }
+            CorvetteList corvetteList = new CorvetteList();
+            for (Corvette f : navalCommand.getCorvetteContainer().getContainer()) {
+                if (f.getNextMaintenance().getYear() < Year.now().getValue() + lifeSpan) {
+                    corvetteList.add(f);
+                }
+            }
+            for (Corvette f : corvetteList.getContainer()) {
+                System.out.println(f);
+            }
+            SpeedBoatList speedBoatList = new SpeedBoatList();
+            for (SpeedBoat f : navalCommand.getSpeedBoatContainer().getContainer()) {
+                if (f.getNextMaintenance().getYear() < Year.now().getValue() + lifeSpan) {
+                    speedBoatList.add(f);
+                }
+            }
+            for (SpeedBoat f : speedBoatList.getContainer()) {
+                System.out.println(f);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Complies with point f. on the requisites.
+     *
+     * @param sc           Scanner for inputs
+     * @param navalCommand Naval Command to use
+     */
     public static void operationPerCrewMember(Scanner sc, NavalCommand navalCommand) {
         try {
             System.out.print("Entre crew member's id: ");

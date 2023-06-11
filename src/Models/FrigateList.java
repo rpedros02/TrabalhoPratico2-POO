@@ -50,4 +50,16 @@ public class FrigateList implements Serializable {
         container = temp;
     }
 
+    /**
+     * Returns the length without null objects
+     *
+     * @return length
+     */
+    public int getLength() {
+        int count = 0;
+        for (Frigate c : container) {
+            if (c != null) count++;
+        }
+        return count;
+    }
 }

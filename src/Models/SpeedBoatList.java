@@ -49,4 +49,17 @@ public class SpeedBoatList implements Serializable {
         }
         container = temp;
     }
+
+    /**
+     * Returns the length without null objects
+     *
+     * @return length
+     */
+    public int getLength() {
+        int count = 0;
+        for (SpeedBoat c : container) {
+            if (c != null) count++;
+        }
+        return count;
+    }
 }

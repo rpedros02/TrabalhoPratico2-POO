@@ -10,6 +10,7 @@ import Exceptions.FrigateNotFoundException;
 import Exceptions.InvalidDateException;
 import Models.Captain;
 import Models.Date;
+import Models.Frigate;
 import Models.NavalCommand;
 
 import java.util.Scanner;
@@ -19,7 +20,14 @@ import static Controllers.CrewController.getPatent;
 import static Controllers.ShipController.getOption;
 
 public class CaptainController {
+    private static NavalCommand navalCommand;
+
+    /**
+     * Method used to run the Captain Controller.
+     * @param navalCommand Naval Command
+     */
     public static void run(NavalCommand navalCommand) {
+        CaptainController.navalCommand = navalCommand;
         Scanner sc = new Scanner(System.in);
         int op;
         do {
@@ -60,6 +68,11 @@ public class CaptainController {
         } while (op != 0);
     }
 
+    /**
+     * Captain Main Menu
+     * @param sc Scanner to read inputs
+     * @return User's option
+     */
     public static int captainMenu(Scanner sc) {
         int option;
         do {
@@ -78,6 +91,13 @@ public class CaptainController {
         return option;
     }
 
+
+    /**
+     * Method to request the data and create a new Captain. See {@link Models.CaptainList#add(Captain)} for the method that adds to the Captain List.
+     *
+     * @param sc           Scanner to read input.
+     * @param navalCommand The naval command to add the {@link Captain}.
+     */
     public static void addCaptain(Scanner sc, NavalCommand navalCommand) {
         Captain captain = new Captain();
         System.out.println("\n-Creating Captain-");
@@ -115,6 +135,12 @@ public class CaptainController {
     }
 
 
+    /**
+     * Method to search the {@link Models.CaptainList} for the instance of {@link Captain} with the given ID.
+     * @param id id to search for
+     * @param navalCommand Naval Command to search in
+     * @return the found Captain
+     */
     public static Captain searchCaptain(int id, NavalCommand navalCommand) {
         Captain[] container = navalCommand.getCaptainContainer().getContainer();
         for (Captain c : container) {
@@ -125,6 +151,10 @@ public class CaptainController {
         throw new FrigateNotFoundException("id not found in the records.");
     }
 
+    /**
+     * Method to iterate the {@link Models.CaptainList} and print all the results
+     * @param navalCommand Naval Command to list
+     */
     private static void listCaptain(NavalCommand navalCommand) {
         System.out.println();
         for (Captain c : navalCommand.getCaptainContainer().getContainer()) {

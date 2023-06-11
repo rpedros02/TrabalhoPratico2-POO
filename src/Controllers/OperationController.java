@@ -22,6 +22,7 @@ public class OperationController {
 
     /**
      * Method to run the Operation Controller
+     *
      * @param navalCommand Naval command to use
      */
     public static void run(NavalCommand navalCommand) {
@@ -66,6 +67,7 @@ public class OperationController {
 
     /**
      * Operation Main Menu
+     *
      * @param sc Scanner for inputs
      * @return user's option
      */
@@ -161,6 +163,7 @@ public class OperationController {
 
     /**
      * Get user input for {@link OperationType}
+     *
      * @param sc Scanner for inputs
      * @return user's {@link OperationType}
      */
@@ -203,6 +206,7 @@ public class OperationController {
 
     /**
      * Get user input for {@link OperationPorpuse}
+     *
      * @param sc Scanner for inputs
      * @return user's {@link OperationPorpuse}
      */

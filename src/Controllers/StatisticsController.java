@@ -307,30 +307,36 @@ public class StatisticsController {
             int lifeSpan = Integer.parseInt(sc.nextLine());
             FrigateList frigateList = new FrigateList();
             for (Frigate f : navalCommand.getFrigatesContainer().getContainer()) {
-                if (f.getNextMaintenance().getYear() < Year.now().getValue() + lifeSpan) {
+                if (f.getNextMaintenance().getYear() < Year.now().getValue() + lifeSpan && f.getNextMaintenance().getYear() > Year.now().getValue()) {
                     frigateList.add(f);
                 }
             }
             for (Frigate f : frigateList.getContainer()) {
-                System.out.println(f);
+                if (f != null) {
+                    System.out.println(f);
+                }
             }
             CorvetteList corvetteList = new CorvetteList();
             for (Corvette f : navalCommand.getCorvetteContainer().getContainer()) {
-                if (f.getNextMaintenance().getYear() < Year.now().getValue() + lifeSpan) {
+                if (f.getNextMaintenance().getYear() < Year.now().getValue() + lifeSpan && f.getNextMaintenance().getYear() > Year.now().getValue()) {
                     corvetteList.add(f);
                 }
             }
             for (Corvette f : corvetteList.getContainer()) {
-                System.out.println(f);
+                if (f != null) {
+                    System.out.println(f);
+                }
             }
             SpeedBoatList speedBoatList = new SpeedBoatList();
             for (SpeedBoat f : navalCommand.getSpeedBoatContainer().getContainer()) {
-                if (f.getNextMaintenance().getYear() < Year.now().getValue() + lifeSpan) {
+                if (f.getNextMaintenance().getYear() < Year.now().getValue() + lifeSpan && f.getNextMaintenance().getYear() > Year.now().getValue()) {
                     speedBoatList.add(f);
                 }
             }
             for (SpeedBoat f : speedBoatList.getContainer()) {
-                System.out.println(f);
+                if (f != null) {
+                    System.out.println(f);
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

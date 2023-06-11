@@ -23,16 +23,16 @@ public class MockData {
         return SHIPS1STNAMES[genRandomInt(0, SHIPS1STNAMES.length - 1)] + " " + SHIPS2NDNAMES[genRandomInt(0, SHIPS2NDNAMES.length - 1)];
     }
 
-    private static int genRandomInt(int origin, int bound) {
+    public static int genRandomInt(int origin, int bound) {
         int range = (bound - origin) + 1;
         return (int) (Math.random() * range) + origin;
 
     }
 
-    private static Date genDate() {
+    public static Date genDate() {
         int day = genRandomInt(1, 28);
         int month = genRandomInt(1, 12);
-        int year = genRandomInt(1980, 2004);
+        int year = genRandomInt(2010, 2019);
         return new Date(day, month, year);
     }
 
@@ -182,24 +182,24 @@ public class MockData {
 
     private static void insertFrigates(FrigateList container, OperationList operationsContainer) {
         for (int i = 0; i < container.getContainer().length; i++) {
-            container.add(new Frigate(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), genRandomInt(75, 150), genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genFrigateType(), genEquipmentList()));
+            container.add(new Frigate(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), Date.genDateLater(new Date(12, 12, 2017)), genDate(), Date.genDateLater(new Date(12, 12, 2017)), genRandomInt(75, 150), genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genFrigateType(), genEquipmentList()));
         }
     }
 
     private static void insertCorvettes(CorvetteList container, OperationList operationsContainer) {
         for (int i = 0; i < container.getContainer().length; i++) {
-            container.add(new Corvette(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), genRandomInt(75, 150), genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genCorvetteType(), genRandomInt(1, 20)));
+            container.add(new Corvette(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), Date.genDateLater(new Date(12, 12, 2017)), genDate(), Date.genDateLater(new Date(12, 12, 2017)), genRandomInt(75, 150), genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genCorvetteType(), genRandomInt(1, 20)));
         }
     }
 
     private static void insertSpeedBoats(SpeedBoatList container, OperationList operationsContainer) {
         for (int i = 0; i < container.getContainer().length; i++) {
-            container.add(new SpeedBoat(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), genDate(), genDate(), genDate(), genRandomInt(75, 150), genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genRandomInt(1, 20)));
+            container.add(new SpeedBoat(genShipName(), MANUFACTURERS[genRandomInt(0, MANUFACTURERS.length - 1)], genDate(), genDate(), Date.genDateLater(new Date(12, 12, 2017)), genDate(), Date.genDateLater(new Date(12, 12, 2017)), genRandomInt(75, 150), genRandomInt(1500, 5000), genRandomInt(20, 40), operationsContainer, genRandomInt(1, 20)));
         }
     }
 
     private static void insertOperation(OperationList container, Captain captain, CrewMember approving, CrewList crew) {
-        container.add(new Operation(genDate(), genDate(), "MOCK MISSION", genDate(), captain, approving, crew, genOperationType(), genPorpuse()));
+        container.add(new Operation(genDate(), Date.genDateLater(new Date(12, 12, 2017)), "MOCK MISSION", genDate(), captain, approving, crew, genOperationType(), genPorpuse()));
     }
 
     public static void generateData(NavalCommand navalCommand) {

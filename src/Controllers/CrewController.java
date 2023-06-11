@@ -6,13 +6,11 @@
 package Controllers;
 
 import Data.DataOperations;
-import Enums.Equipment;
 import Enums.Patent;
 import Exceptions.FrigateNotFoundException;
 import Exceptions.InvalidDateException;
 import Models.CrewMember;
 import Models.Date;
-import Models.Frigate;
 import Models.NavalCommand;
 
 import java.io.Serializable;
@@ -23,6 +21,7 @@ import static Controllers.ShipController.getOption;
 public class CrewController implements Serializable {
     /**
      * Void to run the Crew Controller.
+     *
      * @param navalCommand Naval command to use
      */
     public static void run(NavalCommand navalCommand) {
@@ -68,6 +67,7 @@ public class CrewController implements Serializable {
 
     /**
      * Crew Main Menu
+     *
      * @param sc Scanner Input
      * @return user's option
      */
@@ -156,7 +156,7 @@ public class CrewController implements Serializable {
     /**
      * Method to Edit a {@link CrewMember} instance.
      *
-     * @param crewMember      {@link CrewMember} instance to edit.
+     * @param crewMember   {@link CrewMember} instance to edit.
      * @param navalCommand {@link NavalCommand} to save.
      */
     public static void editCrew(Scanner sc, CrewMember crewMember, NavalCommand navalCommand) {
@@ -191,7 +191,8 @@ public class CrewController implements Serializable {
 
     /**
      * Searches the CrewList for a given id;
-     * @param id id to search for
+     *
+     * @param id           id to search for
      * @param navalCommand Naval Command to search in
      * @return the found Crew Member
      */
@@ -207,6 +208,7 @@ public class CrewController implements Serializable {
 
     /**
      * Lists the Crew Members
+     *
      * @param navalCommand Naval Command to List
      */
     private static void listCrew(NavalCommand navalCommand) {

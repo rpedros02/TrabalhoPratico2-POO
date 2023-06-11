@@ -21,6 +21,7 @@ public class DataOperations {
 
     /**
      * Loads the Data from the file 'navalCommandData.dat'
+     *
      * @return the read NavalC Command
      */
     public static NavalCommand load() {
@@ -38,6 +39,7 @@ public class DataOperations {
 
     /**
      * Saves the Naval Command into the file. If doesn´t exists, creates it.
+     *
      * @param navalCommand Naval command to save
      */
     public static void save(NavalCommand navalCommand) {

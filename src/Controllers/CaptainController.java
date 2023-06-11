@@ -10,7 +10,6 @@ import Exceptions.FrigateNotFoundException;
 import Exceptions.InvalidDateException;
 import Models.Captain;
 import Models.Date;
-import Models.Frigate;
 import Models.NavalCommand;
 
 import java.util.Scanner;
@@ -24,6 +23,7 @@ public class CaptainController {
 
     /**
      * Method used to run the Captain Controller.
+     *
      * @param navalCommand Naval Command
      */
     public static void run(NavalCommand navalCommand) {
@@ -70,6 +70,7 @@ public class CaptainController {
 
     /**
      * Captain Main Menu
+     *
      * @param sc Scanner to read inputs
      * @return User's option
      */
@@ -137,7 +138,8 @@ public class CaptainController {
 
     /**
      * Method to search the {@link Models.CaptainList} for the instance of {@link Captain} with the given ID.
-     * @param id id to search for
+     *
+     * @param id           id to search for
      * @param navalCommand Naval Command to search in
      * @return the found Captain
      */
@@ -153,6 +155,7 @@ public class CaptainController {
 
     /**
      * Method to iterate the {@link Models.CaptainList} and print all the results
+     *
      * @param navalCommand Naval Command to list
      */
     private static void listCaptain(NavalCommand navalCommand) {

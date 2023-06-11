@@ -7,11 +7,14 @@ package Models;
 
 
 import Controllers.ShipController;
+import Data.MockData;
 import Exceptions.InvalidDateException;
 
 import java.io.Serializable;
 import java.time.Year;
 import java.util.Scanner;
+
+import static Data.MockData.genRandomInt;
 
 public class Date implements Serializable {
     public int day;
@@ -117,6 +120,61 @@ public class Date implements Serializable {
             throw new InvalidDateException("Invalid Date.");
         }
 
+    }
+
+    public static Date genDateLater(Date date) {
+        Date newDate = new Date();
+        do {
+            newDate.day = genRandomInt(1, 28);
+            newDate.month = genRandomInt(1, 12);
+            newDate.year = genRandomInt(2020, 2035);
+            if(newDate.isLater(date)){
+                break;
+            }
+        } while (date.isLater(newDate));
+        return newDate;
+    }
+
+    /**
+     * Method that verifies if two Dates are equal.
+     *
+     * @param date → Given Date - Date
+     * @return true if the Dates are equal, false otherwise.
+     */
+    private boolean isEqual(Date date) {
+        return this.day == date.day && this.month == date.month && this.year == date.year;
+    }
+
+    /**
+     * Checks if this Date is earlier than the given one.
+     *
+     * @param date → Given Date - Date
+     * @return true if this Date is earlier, false otherwise.
+     */
+    private boolean isEarlier(Date date) {
+        if (this.year < date.year) {
+            return true;
+        }
+        if (this.year == date.year) {
+            if (this.month < date.month) {
+                return true;
+            }
+            if (this.month == date.month) {
+                return day < date.day;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if this Date is Later than the given one.
+     * The method does this by checking if the date is neither {@link Date#isEqual(Date givenDate)}(Equal) or {@link Date#isEarlier(Date givenDate)}(Earlier).
+     *
+     * @param date → Given Date - Date
+     * @return true if this Date is later than the given one, false otherwise.
+     */
+    private boolean isLater(Date date) {
+        return !(isEarlier(date) && isEqual(date));
     }
 
     /**

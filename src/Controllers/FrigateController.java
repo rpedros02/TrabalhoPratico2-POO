@@ -6,6 +6,7 @@
 package Controllers;
 
 import Data.DataOperations;
+import Enums.Equipment;
 import Enums.FrigateType;
 import Exceptions.FrigateNotFoundException;
 import Exceptions.InvalidDateException;
@@ -223,6 +224,53 @@ public class FrigateController {
     }
 
     /**
+     * Method to request the user for the Equipment.
+     *
+     * @param sc Scanner to read input.
+     * @return the {@link Equipment}.
+     */
+    public static Equipment getEquipment(Scanner sc) {
+        int op;
+        do {
+            System.out.println("Enter the Equipment: ");
+            System.out.println("1. Torpedo;");
+            System.out.println("2. Javelin;");
+            System.out.println("3. Stinger;");
+            System.out.println("4. Phalanx;");
+            System.out.println("5. RAM;");
+            System.out.println("6. Radar;");
+            System.out.println("7. Sonar;");
+            op = (int) getOption(sc);
+            if (op < 1 || op > 7) {
+                System.out.println("Try again!\n");
+            }
+        } while (op < 1 || op > 7);
+        switch (op) {
+            case 1 -> {
+                return Equipment.TORPEDO;
+            }
+            case 2 -> {
+                return Equipment.JAVELIN;
+            }
+            case 3 -> {
+                return Equipment.STINGER;
+            }
+            case 4 -> {
+                return Equipment.PHALANX;
+            }
+            case 5 -> {
+                return Equipment.RAM;
+            }
+            case 6 -> {
+                return Equipment.RADAR;
+            }
+            default -> {
+                return Equipment.SONAR;
+            }
+        }
+    }
+
+    /**
      * Method that iterates the FrigateList and searches for the given id.
      *
      * @param id           -> Frigate Id to search for.
@@ -298,20 +346,22 @@ public class FrigateController {
                 newFrigate.getHistory().add(searchOperation(Integer.parseInt(sc.nextLine()), navalCommand));
                 count++;
             }
-            System.out.println("Added " + count + " operations.");
+            System.out.println("Added " + count + " operation(s).");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-/*
-        System.out.print("Add Equipment? (y - yes | n - no): ");
-        switch (sc.nextLine().toLowerCase()) {
-            case "y" -> {
-
+        System.out.print("Enter how many Equipment the ship has: ");
+        count = 0;
+        try {
+            int nEquipment = Integer.parseInt(sc.nextLine());
+            for (int i = 0; i < nEquipment; i++) {
+                newFrigate.getEquipment().add(getEquipment(sc));
+                count++;
             }
-            case "n" -> newFrigate.setEquipment(new EquipmentList());
-            default -> System.out.println("Invalid Answer, not adding Equipment.");
+            System.out.println("Added " + count + " equipment(s).");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-*/
         navalCommand.getFrigatesContainer().add(newFrigate);
         DataOperations.save(navalCommand);
     }

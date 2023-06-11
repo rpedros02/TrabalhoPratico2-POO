@@ -199,7 +199,7 @@ public class MockData {
     }
 
     private static void insertOperation(OperationList container, Captain captain, CrewMember approving, CrewList crew) {
-        container.add(new Operation(genDate(), genDate(), "MOCK MISSION", genDate(), captain, approving, crew, genOperationType(),genPorpuse()));
+        container.add(new Operation(genDate(), genDate(), "MOCK MISSION", genDate(), captain, approving, crew, genOperationType(), genPorpuse()));
     }
 
     public static void generateData(NavalCommand navalCommand) {
@@ -215,7 +215,7 @@ public class MockData {
                 crew.add(navalCommand.getCrewMemberContainer().getContainer()[genRandomInt(0, navalCommand.getCrewMemberContainer().getContainer().length - 1)]);
             }
             CrewMember approving = navalCommand.getCrewMemberContainer().getContainer()[genRandomInt(0, navalCommand.getCrewMemberContainer().getContainer().length - 1)];
-            Captain captain = navalCommand.getCaptainContainer().getContainer()[genRandomInt(0, navalCommand.getCaptainContainer().getContainer().length - 1)];
+            Captain captain = navalCommand.getCaptainContainer().getContainer()[genRandomInt(0, navalCommand.getCaptainContainer().getContainer().length - 4)];
             insertOperation(navalCommand.getOperationsContainer(), captain, approving, crew);
         }
     }

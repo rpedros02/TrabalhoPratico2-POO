@@ -18,12 +18,12 @@ public class ShipController {
      */
     public static void run(NavalCommand navalCommand) {
         Scanner sc = new Scanner(System.in);
-        int option = -1;
+        int option;
         do {
             switch (option = shipMenu(sc)) {
-                case 1 -> {
-                    FrigateController.run(sc, navalCommand);
-                }
+                case 1 -> FrigateController.run(sc, navalCommand);
+                case 2 -> CorvetteController.run(sc, navalCommand);
+                case 3 -> SpeedBoatController.run(sc, navalCommand);
             }
         } while (option != 0);
     }

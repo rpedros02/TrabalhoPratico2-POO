@@ -21,6 +21,7 @@ public class OperationList implements Serializable {
 
     /**
      * Method that dynamically adds an {@link Operation} to the container;
+     *
      * @param newOperation - {@link Operation} to add to the container.
      */
     public void add(Operation newOperation) {
@@ -34,6 +35,7 @@ public class OperationList implements Serializable {
 
     /**
      * Method that dynamically delets an {@link Operation} from the container;
+     *
      * @param object - object to delete.
      */
     public void delete(Operation object) {
@@ -46,5 +48,18 @@ public class OperationList implements Serializable {
             }
         }
         container = temp;
+    }
+
+    /**
+     * Returns the length without null objects
+     *
+     * @return length
+     */
+    public int getLength() {
+        int count = 0;
+        for (Operation o : container) {
+            if (o != null) count++;
+        }
+        return count;
     }
 }

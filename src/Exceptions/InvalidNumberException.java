@@ -5,8 +5,8 @@
  */
 package Exceptions;
 
-public class InvalidNumberException extends RuntimeException{
-    public InvalidNumberException(String s){
+public class InvalidNumberException extends RuntimeException {
+    public InvalidNumberException(String s) {
         super(s);
     }
 }

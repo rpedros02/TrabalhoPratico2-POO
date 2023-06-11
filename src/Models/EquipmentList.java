@@ -23,6 +23,7 @@ public class EquipmentList implements Serializable {
 
     /**
      * Method that dynamically adds Equipment to the container;
+     *
      * @param newEquipment - Equipment to add to the container.
      */
     public void add(Equipment newEquipment) {
@@ -36,6 +37,7 @@ public class EquipmentList implements Serializable {
 
     /**
      * Method that dynamically delets a {@link Equipment} from the container;
+     *
      * @param object - object to delete.
      */
     public void delete(Equipment object) {

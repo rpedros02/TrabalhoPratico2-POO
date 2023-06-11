@@ -7,6 +7,7 @@
 import Controllers.CrewController;
 import Controllers.OperationController;
 import Controllers.ShipController;
+import Controllers.StatisticsController;
 import Data.DataOperations;
 import Data.MockData;
 import Exceptions.InvalidInputException;
@@ -46,6 +47,7 @@ public class Main {
                 case 2 -> ShipController.run(navalCommand);
                 case 3 -> CrewController.run(navalCommand);
                 case 4 -> OperationController.run(navalCommand);
+                case 5 -> StatisticsController.run(new Scanner(System.in), navalCommand);
             }
         } while (option != 0);
         System.out.println("\b--Goodbye!--");
@@ -87,9 +89,10 @@ public class Main {
             System.out.println("2. Ship Menu;");
             System.out.println("3. Crew Menu;");
             System.out.println("4. Operation Menu;");
+            System.out.println("5. Statistics Menu;");
             System.out.println("0. Quit");
             option = (int) ShipController.getOption(sc);
-        } while (option < 0 || option > 4);
+        } while (option < 0 || option > 5);
         return option;
     }
 
@@ -117,7 +120,7 @@ public class Main {
                 case "n" -> System.out.println("Answer not registered.\b");
                 default -> throw new InvalidInputException("Error: the given input is not recognized!\n");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

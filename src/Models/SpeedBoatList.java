@@ -21,6 +21,7 @@ public class SpeedBoatList implements Serializable {
 
     /**
      * Method that dynamically adds an {@link SpeedBoat} to the container;
+     *
      * @param newSpeedBoat - {@link SpeedBoat} to add to the container.
      */
     public void add(SpeedBoat newSpeedBoat) {
@@ -34,6 +35,7 @@ public class SpeedBoatList implements Serializable {
 
     /**
      * Method that dynamically delets a {@link SpeedBoat} from the container;
+     *
      * @param object - object to delete.
      */
     public void delete(SpeedBoat object) {

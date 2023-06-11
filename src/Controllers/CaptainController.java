@@ -14,9 +14,9 @@ import Models.NavalCommand;
 
 import java.util.Scanner;
 
-import static Controllers.ShipController.getOption;
-import static Controllers.CrewController.getPatent;
 import static Controllers.CrewController.editCrew;
+import static Controllers.CrewController.getPatent;
+import static Controllers.ShipController.getOption;
 
 public class CaptainController {
     public static void run(NavalCommand navalCommand) {
@@ -104,7 +104,7 @@ public class CaptainController {
                 System.out.print("Enter the name of the Medal: ");
                 String medal = sc.nextLine();
                 captain.getMedals().add(medal);
-                count ++;
+                count++;
             }
             System.out.println("Added " + count + " Medals");
         } catch (Exception e) {

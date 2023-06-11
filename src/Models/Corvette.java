@@ -24,6 +24,10 @@ public class Corvette extends Ship implements Serializable {
         this.numberOfLifeVests = numberOfLifeVests;
     }
 
+    public Corvette() {
+        super();
+    }
+
     public static int getNextId() {
         File f = new File("navalCommandData.dat");
         if (f.exists()) {
@@ -45,6 +49,10 @@ public class Corvette extends Ship implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setCorvetteType(CorvetteType corvetteType) {
@@ -72,7 +80,8 @@ public class Corvette extends Ship implements Serializable {
                 "\nNext Maintenance Date: " + nextMaintenance.toString() +
                 "\nLength(meters): " + lengthInMeters +
                 "\nWeight(tons): " + weightInTons +
-                "\nMax Speed(knots): " + maxSpeedKnots + "\n----------";
+                "\nMax Speed(knots): " + maxSpeedKnots +
+                "\nNumber of Live vests: " + numberOfLifeVests + "\n----------";
 
     }
 }

@@ -14,9 +14,9 @@ import java.time.Year;
 import java.util.Scanner;
 
 public class Date implements Serializable {
-    private final int day;
-    private final int month;
-    private final int year;
+    public int day;
+    public int month;
+    public int year;
 
     /**
      * Date Constructor.
@@ -28,6 +28,17 @@ public class Date implements Serializable {
     public Date(int day, int month, int year) {
         this.day = day;
         this.month = month;
+        this.year = year;
+    }
+
+    public Date() {
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -73,47 +84,6 @@ public class Date implements Serializable {
         return flag;
     }
 
-    /**
-     * Method that verifies if two Dates are equal.
-     *
-     * @param date → Given Date - Date
-     * @return true if the Dates are equal, false otherwise.
-     */
-    private boolean isEqual(Date date) {
-        return this.day == date.day && this.month == date.month && this.year == date.year;
-    }
-
-    /**
-     * Checks if this Date is earlier than the given one.
-     *
-     * @param date → Given Date - Date
-     * @return true if this Date is earlier, false otherwise.
-     */
-    private boolean isEarlier(Date date) {
-        if (this.year < date.year) {
-            return true;
-        }
-        if (this.year == date.year) {
-            if (this.month < date.month) {
-                return true;
-            }
-            if (this.month == date.month) {
-                return day < date.day;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Checks if this Date is Later than the given one.
-     * The method does this by checking if the date is neither {@link Date#isEqual(Date givenDate)}(Equal) or {@link Date#isEarlier(Date givenDate)}(Earlier).
-     *
-     * @param date → Given Date - Date
-     * @return true if this Date is later than the given one, false otherwise.
-     */
-    private boolean isLater(Date date) {
-        return !(isEarlier(date) || isEqual(date));
-    }
 
     /**
      * Checks if the given Year is Leap.
@@ -125,6 +95,14 @@ public class Date implements Serializable {
         return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
     }
 
+
+    /**
+     * Creates a new {@link Date} instance.
+     *
+     * @param label Label to use on the input label;
+     * @return the new Date.
+     * @throws InvalidDateException in case the isn't valid.
+     */
     public static Date newDate(String label) throws InvalidDateException {
         Scanner sc = new Scanner(System.in);
         System.out.print("Day of " + label);

@@ -14,5 +14,5 @@ public enum Equipment implements Serializable {
     PHALANX, // Anti-air Missiles
     RAM, // Close range Missiles
     RADAR, // Radar
-    SONAR; // Sonar
+    SONAR // Sonar
 }

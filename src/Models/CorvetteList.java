@@ -21,6 +21,7 @@ public class CorvetteList implements Serializable {
 
     /**
      * Method that dynamically adds a {@link Corvette} to the container;
+     *
      * @param newCorvette - {@link Corvette} to add to the container.
      */
     public void add(Corvette newCorvette) {
@@ -34,6 +35,7 @@ public class CorvetteList implements Serializable {
 
     /**
      * Method that dynamically delets a {@link Corvette} from the container;
+     *
      * @param object - object to delete.
      */
     public void delete(Corvette object) {

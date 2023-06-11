@@ -21,6 +21,7 @@ public class FrigateList implements Serializable {
 
     /**
      * Method that dynamically adds a {@link Frigate} to the container;
+     *
      * @param newFrigate - {@link Frigate} to add to the container.
      */
     public void add(Frigate newFrigate) {
@@ -34,6 +35,7 @@ public class FrigateList implements Serializable {
 
     /**
      * Method that dynamically delets a {@link Frigate} from the container;
+     *
      * @param object - object to delete.
      */
     public void delete(Frigate object) {

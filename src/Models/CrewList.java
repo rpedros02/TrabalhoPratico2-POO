@@ -23,6 +23,7 @@ public class CrewList implements Serializable {
 
     /**
      * Method that dynamically adds a {@link CrewMember} to the container;
+     *
      * @param newCrewMember - {@link CrewMember} to add to the container.
      */
     public void add(CrewMember newCrewMember) {
@@ -36,6 +37,7 @@ public class CrewList implements Serializable {
 
     /**
      * Method that dynamically delets a {@link CrewMember} from the container;
+     *
      * @param object - object to delete.
      */
     public void delete(CrewMember object) {
@@ -48,5 +50,18 @@ public class CrewList implements Serializable {
             }
         }
         container = temp;
+    }
+
+    /**
+     * Returns the length without null objects
+     *
+     * @return length
+     */
+    public int getLength() {
+        int count = 0;
+        for (CrewMember c : container) {
+            if (c != null) count++;
+        }
+        return count;
     }
 }

@@ -21,6 +21,10 @@ public class SpeedBoat extends Ship implements Serializable {
         this.numberOfLifeVests = numberOfLifeVests;
     }
 
+    public SpeedBoat() {
+        super();
+    }
+
     public static int getNextId() {
         File f = new File("navalCommandData.dat");
         if (f.exists()) {
@@ -51,5 +55,21 @@ public class SpeedBoat extends Ship implements Serializable {
 
     public void setNumberOfLifeVests(int numberOfLifeVests) {
         this.numberOfLifeVests = numberOfLifeVests;
+    }
+
+    @Override
+    public String toString() {
+        return "\nCorvette ID: " + id +
+                "\nName: " + name +
+                "\nManufacturer: " + manufacturer +
+                "\nBaptism Date: " + baptismDate.toString() +
+                "\nLast Inspection Date: " + lastInspection.toString() +
+                "\nNext Inspection Date: " + nextInspection.toString() +
+                "\nLast Maintenance Date: " + lastMaintenance.toString() +
+                "\nNext Maintenance Date: " + nextMaintenance.toString() +
+                "\nLength(meters): " + lengthInMeters +
+                "\nWeight(tons): " + weightInTons +
+                "\nMax Speed(knots): " + maxSpeedKnots +
+                "\nNumber of Live vests: " + numberOfLifeVests + "\n----------";
     }
 }

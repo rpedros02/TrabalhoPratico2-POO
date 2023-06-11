@@ -17,31 +17,29 @@ import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.CREATE;
 
 public class DataOperations {
-    static final String NAVAL_COMMAND_FILE ="navalCommandData.dat";
+    static final String NAVAL_COMMAND_FILE = "navalCommandData.dat";
 
-    public static NavalCommand load(){
+    public static NavalCommand load() {
         NavalCommand navalCommand = null;
         Path file = Paths.get(NAVAL_COMMAND_FILE);
         try {
             ObjectInputStream o = new ObjectInputStream(new FileInputStream(file.toString()));
             navalCommand = (NavalCommand) o.readObject();
             o.close();
-        }
-        catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return navalCommand;
     }
 
     public static void save(NavalCommand navalCommand) {
         Path file = Paths.get(NAVAL_COMMAND_FILE);
-        try{
+        try {
             ObjectOutputStream o = new ObjectOutputStream(Files.newOutputStream(file, CREATE));
             o.writeObject(navalCommand);
             o.close();
-        }
-        catch (Exception e){
-            System.out.println(e);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

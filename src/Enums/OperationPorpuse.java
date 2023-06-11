@@ -11,11 +11,18 @@ public enum OperationPorpuse implements Serializable {
     NATIONAL,
     OTAN,
     UN;
-    public static String toString(OperationPorpuse operationPorpuse){
-        switch (operationPorpuse){
-            case NATIONAL -> {return "Nacional";}
-            case OTAN -> {return "NATO";}
-            default -> {return "ONU";}
+
+    public static String toString(OperationPorpuse operationPorpuse) {
+        switch (operationPorpuse) {
+            case NATIONAL -> {
+                return "Nacional";
+            }
+            case OTAN -> {
+                return "NATO";
+            }
+            default -> {
+                return "ONU";
+            }
         }
     }
 }

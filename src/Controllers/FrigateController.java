@@ -10,7 +10,9 @@ import Enums.FrigateType;
 import Exceptions.FrigateNotFoundException;
 import Exceptions.InvalidDateException;
 import Exceptions.InvalidInputException;
-import Models.*;
+import Models.Date;
+import Models.Frigate;
+import Models.NavalCommand;
 
 import java.util.Scanner;
 
@@ -177,7 +179,7 @@ public class FrigateController {
             }
             case 11 -> {
                 System.out.println("Current Frigate Type: " + FrigateType.toString(frigate.getFrigateType()));
-                System.out.println("New Current Frigate Type: ");
+                System.out.println("New Frigate Type: ");
                 try {
                     frigate.setFrigateType(getFrigateType(sc));
                 } catch (InvalidInputException e) {
@@ -289,15 +291,15 @@ public class FrigateController {
         newFrigate.setMaxSpeedKnots((int) getOption(sc));
         System.out.print("Enter how many Operations the ship has: ");
         int count = 0;
-        try{
+        try {
             int nOp = Integer.parseInt(sc.nextLine());
-            for(int i = 0; i< nOp; i++){
+            for (int i = 0; i < nOp; i++) {
                 System.out.print("Enter the Operation ID: ");
-                newFrigate.getHistory().add(searchOperation(Integer.parseInt(sc.nextLine()),navalCommand));
+                newFrigate.getHistory().add(searchOperation(Integer.parseInt(sc.nextLine()), navalCommand));
                 count++;
             }
             System.out.println("Added " + count + " operations.");
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 /*

@@ -22,6 +22,7 @@ public class MedalList implements Serializable {
 
     /**
      * Method that dynamically adds a Medal to the container;
+     *
      * @param newMedal - Medal to add to the container.
      */
     public void add(String newMedal) {
@@ -35,6 +36,7 @@ public class MedalList implements Serializable {
 
     /**
      * Method that dynamically delets a Medal from the container;
+     *
      * @param object - object to delete.
      */
     public void delete(String object) {

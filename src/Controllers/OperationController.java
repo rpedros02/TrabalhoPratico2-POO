@@ -14,9 +14,9 @@ import Models.*;
 
 import java.util.Scanner;
 
-import static Controllers.ShipController.getOption;
-import static Controllers.CrewController.searchCrew;
 import static Controllers.CaptainController.searchCaptain;
+import static Controllers.CrewController.searchCrew;
+import static Controllers.ShipController.getOption;
 
 public class OperationController {
 
@@ -80,6 +80,7 @@ public class OperationController {
 
     /**
      * Method to request the data and create a new Frigate. See {@link Models.OperationList#add(Operation)} for the method that adds to the Frigate List.
+     *
      * @param sc           Scanner to read input.
      * @param navalCommand The naval command to add the Frigate.
      */
@@ -163,7 +164,7 @@ public class OperationController {
             if (op < 1 || op > 6) {
                 System.out.println("Try again!\n");
             }
-        } while (op < 1 || op > 3);
+        } while (op < 1 || op > 6);
         switch (op) {
             case 1 -> {
                 return OperationType.COMBAT;
@@ -189,7 +190,7 @@ public class OperationController {
     public static OperationPorpuse getOperationPorpuse(Scanner sc) {
         int op;
         do {
-            System.out.println("Enter the Organisation: ");
+            System.out.println("Enter the Operation Porpuse: ");
             System.out.println("1. National;");
             System.out.println("2. NATO;");
             System.out.println("3. ONU;");
@@ -214,7 +215,7 @@ public class OperationController {
     /**
      * Method to Edit a {@link Operation} instance.
      *
-     * @param operation      {@link Operation} instance to edit.
+     * @param operation    {@link Operation} instance to edit.
      * @param navalCommand {@link NavalCommand} to save.
      */
     public static void editFrigate(Operation operation, NavalCommand navalCommand) {
@@ -254,7 +255,7 @@ public class OperationController {
                 operation.setApprovedDate(Date.newDate("new Approved Date"));
             }
             case 5 -> {
-                System.out.println("Current approving Member: " + searchCrew(operation.getApprovingMember().getId(),navalCommand));
+                System.out.println("Current approving Member: " + searchCrew(operation.getApprovingMember().getId(), navalCommand));
                 boolean flag = false;
                 while (!flag) {
                     try {
@@ -267,7 +268,7 @@ public class OperationController {
                 }
             }
             case 6 -> {
-                System.out.println("Current Captain : " + searchCaptain(operation.getCaptain().getId(),navalCommand));
+                System.out.println("Current Captain : " + searchCaptain(operation.getCaptain().getId(), navalCommand));
                 boolean flag = false;
                 while (!flag) {
                     try {

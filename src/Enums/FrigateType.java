@@ -12,11 +12,17 @@ public enum FrigateType implements Serializable {
     ANTIAIR,
     PATROL;
 
-    public static String toString(FrigateType frigateType){
-        switch (frigateType){
-            case ANTISUBMARINE -> {return "Anti-Submarine";}
-            case ANTIAIR -> {return "Anti-Air";}
-            default -> {return "Patrol";}
+    public static String toString(FrigateType frigateType) {
+        switch (frigateType) {
+            case ANTISUBMARINE -> {
+                return "Anti-Submarine";
+            }
+            case ANTIAIR -> {
+                return "Anti-Air";
+            }
+            default -> {
+                return "Patrol";
+            }
         }
     }
 }

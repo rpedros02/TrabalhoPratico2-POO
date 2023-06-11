@@ -25,10 +25,10 @@ public class Operation implements Serializable {
     private Date approvedDate; // Date of mission's approval
     private CrewMember approvingMember; // Person who approved the mission
     private Captain captain; // Operation Captain
-    private CrewList operationCrew; // Array of Crew Members that represents the Crew of the mission;
+    private final CrewList operationCrew; // Array of Crew Members that represents the Crew of the mission;
     private OperationType operationType; // Operation Type
 
-    public Operation(Date beginDate, Date endMission, String missionBriefing, Date approvedDate, Captain captain, CrewMember approvingMember, CrewList operationCrew, OperationType operationType,OperationPorpuse operationPorpuse) {
+    public Operation(Date beginDate, Date endMission, String missionBriefing, Date approvedDate, Captain captain, CrewMember approvingMember, CrewList operationCrew, OperationType operationType, OperationPorpuse operationPorpuse) {
         this.id = getNextId();
         this.beginDate = beginDate;
         this.endMission = endMission;
@@ -38,9 +38,10 @@ public class Operation implements Serializable {
         this.approvingMember = approvingMember;
         this.operationCrew = operationCrew;
         this.operationType = operationType;
+        this.operationPorpuse = operationPorpuse;
     }
 
-    public Operation(){
+    public Operation() {
         this.id = getNextId();
         this.operationCrew = new CrewList();
     }
@@ -120,10 +121,6 @@ public class Operation implements Serializable {
         return operationCrew;
     }
 
-    public void setOperationCrew(CrewList operationCrew) {
-        this.operationCrew = operationCrew;
-    }
-
     public void setOperationType(OperationType operationType) {
         this.operationType = operationType;
     }
@@ -138,5 +135,18 @@ public class Operation implements Serializable {
 
     public OperationType getOperationType() {
         return operationType;
+    }
+
+    @Override
+    public String toString() {
+        return "\nOperation id: " + id +
+                "\nBegin Date: " + beginDate.toString() +
+                "\nEnd Date:" + endMission.toString() +
+                "\nMission Briefing: " + missionBriefing +
+                "\nOperation Porpuse: " + OperationPorpuse.toString(operationPorpuse) +
+                "\nApproved Date: " + approvedDate.toString() +
+                "\nApproving Member" + approvingMember.getName() +
+                "\nCaptain: " + captain.getName() +
+                "\nOperation Type: " + OperationType.toString(operationType) + "\n---------";
     }
 }

@@ -12,14 +12,27 @@ public enum OperationType {
     ESCORT,
     RECON,
     RESCUE;
-    public static String toString(OperationType operationType){
-        switch (operationType){
-            case COMBAT -> {return "Combat";}
-            case DEFENSE -> {return "Defense";}
-            case ESCORT -> {return "Escort";}
-            case RECON -> {return "Recon";}
-            case RESCUE -> {return "Rescue";}
-            default -> {return "Patrol";}
+
+    public static String toString(OperationType operationType) {
+        switch (operationType) {
+            case COMBAT -> {
+                return "Combat";
+            }
+            case DEFENSE -> {
+                return "Defense";
+            }
+            case ESCORT -> {
+                return "Escort";
+            }
+            case RECON -> {
+                return "Recon";
+            }
+            case RESCUE -> {
+                return "Rescue";
+            }
+            default -> {
+                return "Patrol";
+            }
         }
     }
 }

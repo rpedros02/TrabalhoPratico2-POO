@@ -22,6 +22,7 @@ public class CaptainList implements Serializable {
 
     /**
      * Method that dynamically adds a {@link Captain} to the container;
+     *
      * @param newCaptain - {@link Captain} to add to the container.
      */
     public void add(Captain newCaptain) {
@@ -35,6 +36,7 @@ public class CaptainList implements Serializable {
 
     /**
      * Method that dynamically delets a {@link Captain} from the container;
+     *
      * @param object - object to delete.
      */
     public void delete(Captain object) {
